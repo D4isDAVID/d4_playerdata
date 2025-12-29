@@ -1,0 +1,44 @@
+name: CD
+
+on:
+  push:
+    tags:
+      - '**'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Draft Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+        with:
+          path: d4_playerdata
+          sparse-checkout: |
+            docs
+            server
+            CHANGELOG.md
+            CONTRIBUTING.md
+            LICENSE
+            README.md
+            SECURITY.md
+            fxmanifest.lua
+          sparse-checkout-cone-mode: false
+
+      - name: Archive
+        shell: bash
+        run: |
+          rm -rf ./d4_playerdata/.git
+          zip -r d4_playerdata.zip ./d4_playerdata/
+
+      - name: Draft release
+        uses: softprops/action-gh-release@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          draft: true
+          files: |
+            ./*.zip

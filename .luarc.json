@@ -1,0 +1,33 @@
+{
+  "$schema": "https://raw.githubusercontent.com/LuaLS/vscode-lua/master/setting/schema.json",
+  "diagnostics": {
+    "enable": true
+  },
+  "format": {
+    "enable": true
+  },
+  "runtime": {
+    "fileEncoding": "utf8",
+    "nonstandardSymbol": [
+      "/**/",
+      "`",
+      "+=",
+      "-=",
+      "*=",
+      "/=",
+      "<<=",
+      ">>=",
+      "&=",
+      "|=",
+      "^="
+    ],
+    "version": "Lua 5.4"
+  },
+  "type": {
+    "castNumberToInteger": false,
+    "checkTableShape": true,
+    "inferParamType": false,
+    "weakNilCheck": false,
+    "weakUnionCheck": false
+  }
+}

@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - '**'
+    pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Lint
+        uses: iLLeniumStudios/fivem-lua-lint-action@v2
+        with:
+          fail_on_warnings: "true"
