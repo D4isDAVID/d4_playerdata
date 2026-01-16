@@ -33,10 +33,10 @@ If you are interested in contributing to this project, read the
 This project's source code © 2025 David Malchin is licensed under the
 **MIT License (MIT)** provided in the [LICENSE] file.
 
-[user guide]: ./docs/user-guide.md
 [github discussions]: https://github.com/D4isDAVID/d4_playerdata/discussions
 [discord server]: https://discord.gg/rdjpS2K8hC
-[security policy]: https://github.com/D4isDAVID/d4_playerdata/security/policy
+[user guide]: ./docs/user-guide.md
 [`docs/`]: ./docs/README.md
+[security policy]: https://github.com/D4isDAVID/d4_playerdata/security/policy
 [contributing guidelines]: ./CONTRIBUTING.md
 [license]: ./LICENSE
