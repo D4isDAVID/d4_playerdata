@@ -2,7 +2,7 @@ Utils.kvp = {}
 
 ---@param prefix string
 ---@param func fun(key: string)
-function Utils.kvp.search(prefix, func)
+function Utils.searchKvp(prefix, func)
     local handle = StartFindKvp(prefix)
 
     if handle == -1 then

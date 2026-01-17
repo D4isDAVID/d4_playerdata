@@ -1,7 +1,3 @@
-local ignoredIdentifiers = {
-    ip = true,
-}
-
 ---@param identifier string
 ---@return string identifierType
 function Utils.getIdentifierType(identifier)
@@ -11,6 +7,7 @@ end
 ---@param player unknown
 ---@return string[]
 function Utils.getIdentifiers(player)
+    local ignoredIdentifiers = Convars.ignoredIdentifiers()
     ---@type string[]
     local identifiers = {}
 
@@ -24,4 +21,23 @@ function Utils.getIdentifiers(player)
     end
 
     return identifiers
+end
+
+---@param player unknown
+---@return string[]
+function Utils.getMissingIdentifiers(player)
+    local requiredIdentifiers = Convars.requiredIdentifiers()
+    ---@type string[]
+    local missing = {}
+
+    for i = 1, #requiredIdentifiers do
+        local identifierType = requiredIdentifiers[i]
+        local identifier = GetPlayerIdentifierByType(player, identifierType)
+
+        if identifier == nil then
+            missing[#missing + 1] = identifierType
+        end
+    end
+
+    return missing
 end

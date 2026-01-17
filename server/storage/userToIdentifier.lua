@@ -14,7 +14,7 @@ end
 function Storage.userToIdentifier.getAll(userId)
     local identifiers = {}
 
-    Utils.kvp.search(key(userId), function(idKey)
+    Utils.searchKvp(key(userId), function(idKey)
         identifiers[#identifiers + 1] = GetResourceKvpString(idKey)
     end)
 
