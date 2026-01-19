@@ -11,6 +11,7 @@ behavior of these IDs.
 
 Please read the following links for more context:
 - [Identifier Types](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/GetPlayerIdentifiers/#identifier-types)
+- [Basic Aces & Principals overview/guide](https://forum.cfx.re/t/90917)
 
 ## User IDs
 
@@ -36,6 +37,8 @@ multiple User IDs are found, the oldest User ID is assigned. Existing identifier
 links are not modified, preventing accidental reassignment. If no linked User ID
 is found, a new one is created and linked to the identifiers.
 
+Players are also given an ACE principal based on the User ID: `user.<UserId>`.
+
 ## Data IDs
 
 The Data ID is an integer value provided by this resource, similar to a
@@ -50,3 +53,5 @@ By default, when a player joins, this resource automatically assigns the first
 Data ID linked to the player's User ID, or creates one if none exist. Other
 resources can disable this functionality to implement their own Data ID
 assignments, such as a character selection screen.
+
+Players are also given an ACE principal based on the Data ID: `data.<DataId>`.
