@@ -1,7 +1,6 @@
 # Documentation
 
-This documentation for d4_playerdata covers usage, concepts, the API, and
-internal design details.
+This documentation covers usage, concepts, the API, and internal design details.
 
 ## Getting Started
 
@@ -14,8 +13,8 @@ Essential information for anyone using the resource.
 
 Reference for developers integrating the resource into their resources.
 
-- **[Events](./api/events.md)**
-- **[Exports](./api/exports.md)**
+- **[Users API](./api/users.md):** Exports and events to manage User IDs
+- **[Data API](./api/data.md):** Exports and events to manage Data IDs
 
 ## Internals
 
