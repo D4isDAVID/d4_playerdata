@@ -84,6 +84,7 @@ function API.users.ensure(player)
         end
     end
 
+    Utils.addPlayerPrincipal(player, Utils.getUserAceName(userId))
     print(('Player %s was assigned User ID %s'):format(player, userId))
 
     FlushResourceKvp()
@@ -109,6 +110,8 @@ function API.users.remove(player)
         userIdToPlayers[userId] = nil
     end
 
+    Utils.removePlayerPrincipal(player, Utils.getUserAceName(userId))
+    print(('Player %s was unassigned User ID %s'):format(player, userId))
     TriggerEvent('d4_playerdata:userLeft', player, userId)
 end
 

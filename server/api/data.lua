@@ -40,6 +40,7 @@ function API.data.assign(player, dataId)
     playerToDataId[player] = dataId
     dataIdToPlayer[dataId] = player
 
+    Utils.addPlayerPrincipal(player, Utils.getDataAceName(dataId))
     if resource == nil then
         print(('Player %s (User ID %s) was auto-assigned Data ID %s')
             :format(player, userId, dataId))
@@ -65,6 +66,9 @@ function API.data.unassign(player)
 
     playerToDataId[source] = nil
     dataIdToPlayer[dataId] = nil
+    Utils.removePlayerPrincipal(player, Utils.getDataAceName(dataId))
+    print(('Player %s (User ID %s) was unassigned Data ID %s')
+        :format(player, API.users.get(player), dataId))
     TriggerEvent('d4_playerdata:dataUnassigned', player, dataId)
 
     return true
