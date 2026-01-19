@@ -28,8 +28,8 @@ function Storage.userToData.getAll(userId)
     return dataIds
 end
 
----@param dataId integer
 ---@param userId integer
+---@param dataId integer
 function Storage.userToData.set(userId, dataId)
     SetResourceKvpIntNoSync(key(userId, dataId), dataId)
 end

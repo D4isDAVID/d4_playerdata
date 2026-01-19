@@ -8,10 +8,10 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.{lua,cfg}]
+[*.lua]
 indent_size = 4
 
-[*.lua] # see https://github.com/CppCXY/EmmyLuaCodeStyle
+# see https://github.com/CppCXY/EmmyLuaCodeStyle
 # [basic]
 quote_style = single
 table_separator_style = comma
@@ -84,3 +84,4 @@ break_table_list = true
 ignore_space_after_colon = false
 remove_call_expression_list_finish_comma = true
 end_statement_with_semicolon = never
+remove_leading_zero_in_float = false

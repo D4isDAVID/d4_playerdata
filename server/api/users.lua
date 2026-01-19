@@ -33,7 +33,8 @@ end
 ---@param userId integer
 ---@return boolean connected
 function API.users.isConnected(userId)
-    return userIdToPlayers[userId] ~= nil and next(userIdToPlayers[userId]) ~= nil
+    return userIdToPlayers[userId] ~= nil and
+        next(userIdToPlayers[userId]) ~= nil
 end
 
 ---@param userId integer

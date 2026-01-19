@@ -1,5 +1,6 @@
 {
   "editor.defaultFormatter": "sumneko.lua",
   "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
   "files.insertFinalNewline": true
 }
