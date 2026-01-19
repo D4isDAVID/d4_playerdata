@@ -10,12 +10,13 @@ local userIdToPlayers = {}
 function API.users.get(player)
     player = tostring(player)
 
-    if playerToUserId[player] then
-        return playerToUserId[player]
-    end
+    return playerToUserId[player]
+end
 
+---@param identifiers string[]
+---@return integer? userId
+function API.users.resolve(identifiers)
     local userId
-    local identifiers = Utils.getIdentifiers(player)
 
     for i = 1, #identifiers do
         local identifier = identifiers[i]
@@ -54,8 +55,8 @@ end
 function API.users.ensure(player)
     player = tostring(player)
 
-    local userId = API.users.get(player)
     local identifiers = Utils.getIdentifiers(player)
+    local userId = API.users.get(player) or API.users.resolve(identifiers)
 
     if userId == nil then
         if #identifiers == 0 then
@@ -83,24 +84,35 @@ function API.users.ensure(player)
         end
     end
 
+    print(('Player %s was assigned User ID %s'):format(player, userId))
+
     FlushResourceKvp()
+    TriggerEvent('d4_playerdata:userJoined', player, userId)
+
     return userId
 end
 
-AddEventHandler('playerDropped', function()
-    local source = tostring(source)
+---@param player unknown
+function API.users.remove(player)
+    player = tostring(player)
 
-    local userId = playerToUserId[source]
+    local userId = playerToUserId[player]
 
-    if userId ~= nil then
-        playerToUserId[source] = nil
-        userIdToPlayers[userId][source] = nil
-
-        if next(userIdToPlayers[userId]) == nil then
-            userIdToPlayers[userId] = nil
-        end
+    if userId == nil then
+        return
     end
-end)
 
-exports('getUserIdFromPlayer', API.users.get)
+    playerToUserId[player] = nil
+    userIdToPlayers[userId][player] = nil
+
+    if next(userIdToPlayers[userId]) == nil then
+        userIdToPlayers[userId] = nil
+    end
+
+    TriggerEvent('d4_playerdata:userLeft', player, userId)
+end
+
+exports('getUserId', API.users.get)
+exports('resolveUserId', API.users.resolve)
+exports('isUserIdConnected', API.users.isConnected)
 exports('getPlayersFromUserId', API.users.getPlayers)

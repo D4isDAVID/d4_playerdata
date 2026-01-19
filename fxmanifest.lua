@@ -12,9 +12,10 @@ use_experimental_fxv2_oal 'yes'
 
 server_scripts {
     'server/init.lua',
+    'server/convars.lua',
     'server/utils/*.lua',
     'server/storage/*.lua',
     'server/api/*.lua',
-    'server/convars.lua',
-    'server/connect.lua',
+    'server/connecting.lua',
+    'server/players.lua',
 }

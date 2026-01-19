@@ -48,3 +48,49 @@ Used to get the identifier linked to a User ID.
 ### Returns
 
 - `string` - The identifier linked to the User ID (e.g. `'license2:abcdefg'`).
+
+## Incremental Data IDs
+
+```
+dataId
+```
+
+Used to increment and create new Data IDs.
+This is a persistent value and must never be decremented or reset.
+
+### Returns
+
+- `integer` - The next Data ID.
+
+## User ID to Data IDs
+
+```
+userToData:<userId>:<dataId>
+```
+
+Used to get the Data ID linked to a given User ID.
+
+### Parameters
+
+- `userId: integer` - The User ID
+- `dataId: integer` - The Data ID
+
+### Returns
+
+- `integer` - The given Data ID.
+
+## Data ID to User ID
+
+```
+dataToUser:<dataId>
+```
+
+Used to get the User ID linked to the given Data ID.
+
+### Parameters
+
+- `dataId: integer` - The Data ID
+
+### Returns
+
+- `integer` - The User ID linked to the given Data ID.

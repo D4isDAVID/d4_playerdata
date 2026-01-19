@@ -1,3 +1,5 @@
 API = {}
 Storage = {}
-Utils = {}
+Utils = {
+    currentResource = GetCurrentResourceName(),
+}
