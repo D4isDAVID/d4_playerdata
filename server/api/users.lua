@@ -64,7 +64,7 @@ function API.users.ensure(player)
         end
 
         userId = Storage.userId.increment()
-    elseif API.users.isConnected(userId) and not Convars.allowDuplicatePlayers() then
+    elseif API.users.isConnected(userId) and not Convars.allowDuplicateUsers() then
         return nil
     end
 

@@ -47,8 +47,8 @@ end
 
 Convars = {
     ---@return boolean
-    allowDuplicatePlayers = createConvarHandler(
-        'playerdata_allowDuplicatePlayers',
+    allowDuplicateUsers = createConvarHandler(
+        'playerdata_allowDuplicateUsers',
         false,
         GetConvar
     ),

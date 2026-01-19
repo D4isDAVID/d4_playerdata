@@ -30,7 +30,7 @@ AddEventHandler('playerConnecting', function(name, _, deferrals)
     end
 
     local userId = API.users.get(source)
-    if userId ~= nil and API.users.isConnected(userId) and not Convars.allowDuplicatePlayers() then
+    if userId ~= nil and API.users.isConnected(userId) and not Convars.allowDuplicateUsers() then
         print(('Dropping %s because their User ID is already connected')
             :format(name))
         deferrals.done('You are already in the server.')
