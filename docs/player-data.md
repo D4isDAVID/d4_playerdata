@@ -1,6 +1,6 @@
 # Player Data
 
-> TL;DR
+> TL;DR:
 > This resource assigns players a persistent User ID linked to player
 > identifiers, and provides Data IDs for data similar to characters or save
 > files. Use User IDs for identity, and Data IDs for gameplay state.
