@@ -74,11 +74,36 @@ exports.d4_playerdata:deleteUserId(userId)
 ```
 
 Deletes the given User ID, and returns whether it was successful.
-Returns false if a player with the given User ID is currently connected.
+Returns false if a player with the given User ID is currently connected, or it
+failed to delete a Data ID.
 
 #### Parameters
 
 - `userId: integer` - The User ID.
+
+#### Returns
+
+- `boolean` - Whether the deletion was successful.
+
+### Migrate User ID
+
+```
+exports.d4_playerdata:migrateUserId(oldUserId, newUserId)
+```
+
+Moves Data IDs and identifiers from one User ID to another, and returns whether
+it was successful. Only identifier types that don't exist on the new User ID are
+moved. Returns false if the given old and new User IDs are equal, a player with
+the old User ID is currently connected, or it failed to migrate a Data ID.
+
+#### Parameters
+
+- `oldUserId: integer` - The old User ID to migrate the data from.
+- `newUserId: integer` - The new User ID to migrate the data to.
+
+#### Returns
+
+- `boolean` - Whether the migration was successful.
 
 ### Get User ID From Identifier
 
@@ -95,6 +120,23 @@ Returns the User ID linked to the given identifier.
 #### Returns
 
 - `integer?` - The User ID linked to the given identifier.
+
+### Get Identifier From User ID
+
+```
+exports.d4_playerdata:getIdentifierFromUserId(userId, identifierType)
+```
+
+Returns the identifier of the given type linked to the given User ID.
+
+#### Parameters
+
+- `userId: integer` - The User ID.
+- `identifierType: integer` - The identifier type.
+
+#### Returns
+
+- `string?` - The identifier of the given type linked to the given User ID.
 
 ### Get Identifiers From User ID
 
@@ -138,6 +180,20 @@ Triggered after a User ID is deleted.
 
 - `userId: integer` - The deleted User ID.
 
+### User Migrated
+
+```
+AddEventHandler('d4_playerdata:userMigrated', function(oldUserId, newUserId) end)
+```
+
+Triggered after a User ID is migrated to another.
+The old User ID will be deleted after this event is triggered.
+
+#### Parameters
+
+- `oldUserId: integer` - The old User ID data was migrated from.
+- `newUserId: integer` - The new User ID data was migrated to.
+
 ### User Joined
 
 ```
@@ -162,5 +218,4 @@ Triggered after a player is unassigned a User ID.
 #### Parameters
 
 - `source: string` - The player Net ID.
-- `userId: integer` - The assigned User ID.
-
+- `userId: integer` - The unassigned User ID.

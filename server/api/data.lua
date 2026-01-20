@@ -109,6 +109,30 @@ function API.data.delete(dataId)
     return true
 end
 
+---@param dataId integer
+---@param newUserId integer
+---@return boolean success
+function API.data.migrate(dataId, newUserId)
+    if API.data.getPlayer(dataId) ~= nil then
+        return false
+    end
+
+    local oldUserId = Storage.dataToUser.get(dataId)
+    if oldUserId == nil or oldUserId == newUserId then
+        return false
+    end
+
+    Storage.dataToUser.set(dataId, newUserId)
+    Storage.userToData.set(newUserId, dataId)
+    Storage.userToData.delete(oldUserId, dataId)
+
+    FlushResourceKvp()
+    TriggerEvent('d4_playerdata:dataMigrated', dataId, newUserId,
+        oldUserId)
+
+    return true
+end
+
 ---@param player unknown
 ---@return integer? dataId
 function API.data.autoAssign(player)
@@ -146,6 +170,7 @@ exports('assignDataId', API.data.assign)
 exports('unassignDataId', API.data.unassign)
 exports('createDataId', API.data.create)
 exports('deleteDataId', API.data.delete)
+exports('migrateDataId', API.data.migrate)
 exports('disableDataAutoAssign', function()
     if not autoAssign then
         return

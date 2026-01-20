@@ -148,8 +148,44 @@ function API.users.delete(userId)
     return true
 end
 
+---@param oldUserId integer
+---@param newUserId integer
+---@return boolean success
+function API.users.migrate(oldUserId, newUserId)
+    if oldUserId == newUserId or API.users.isConnected(oldUserId) then
+        return false
+    end
+
+    local dataIds = Storage.userToData.getAll(oldUserId)
+    local identifiers = Storage.userToIdentifier.getAll(oldUserId)
+
+    for i = 1, #dataIds do
+        if not API.data.migrate(dataIds[i], newUserId) then
+            return false
+        end
+    end
+
+    for i = 1, #identifiers do
+        local identifier = identifiers[i]
+        local idType = Utils.getIdentifierType(identifier)
+
+        if not Storage.userToIdentifier.get(newUserId, idType) then
+            Storage.identifierToUser.set(identifier, newUserId)
+            Storage.userToIdentifier.set(newUserId, identifier)
+        end
+    end
+
+    FlushResourceKvp()
+    TriggerEvent('d4_playerdata:userMigrated', oldUserId, newUserId)
+
+    API.users.delete(oldUserId)
+
+    return true
+end
+
 exports('getUserId', API.users.get)
 exports('resolveUserId', API.users.resolve)
 exports('isUserIdConnected', API.users.isConnected)
 exports('getPlayersFromUserId', API.users.getPlayers)
 exports('deleteUserId', API.users.delete)
+exports('migrateUserId', API.users.migrate)

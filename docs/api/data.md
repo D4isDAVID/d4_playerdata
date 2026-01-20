@@ -96,12 +96,35 @@ exports.d4_playerdata:deleteDataId(dataId)
 ```
 
 Deletes the given Data ID, and returns whether it was successful.
-Returns false if the Data ID does not exist, or if a player with the given Data
-ID is currently connected.
+Returns false if the Data ID does not exist, or a player with the given Data ID
+is currently connected.
 
 #### Parameters
 
 - `dataId: integer` - The Data ID.
+
+#### Returns
+
+- `boolean` - Whether the deletion was successful.
+
+### Migrate Data ID
+
+```
+exports.d4_playerdata:migrateDataId(dataId, newUserId)
+```
+
+Moves the given Data ID to a new User ID, and returns whether it was successful.
+Returns false if the Data ID does not exist, the old User ID is equal to the new
+User ID, or a player with the given Data ID is currently connected.
+
+#### Parameters
+
+- `dataId: integer` - The Data ID.
+- `newUserId: integer` - The new User ID to link the given Data ID to.
+
+#### Returns
+
+- `boolean` - Whether the migration was successful.
 
 ### Disable Data Auto Assignment
 
@@ -189,6 +212,20 @@ Triggered after a Data ID is deleted.
 
 - `dataId: integer` - The deleted Data ID.
 - `userId: integer` - The User ID linked to the deleted Data ID.
+
+### Data Migrated
+
+```
+AddEventHandler('d4_playerdata:dataMigrated', function(dataId, oldUserId, newOldId) end)
+```
+
+Triggered after a Data ID is migrated to another User ID.
+
+#### Parameters
+
+- `dataId: integer` - The migrated Data ID.
+- `oldUserId: integer` - The User ID previously linked to the migrated Data ID.
+- `newUserId: integer` - The User ID currently linked to the migrated Data ID.
 
 ### Data Assigned
 

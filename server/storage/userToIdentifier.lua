@@ -10,6 +10,13 @@ local function key(userId, identifierType)
 end
 
 ---@param userId integer
+---@param identifierType string
+---@return string? identifier
+function Storage.userToIdentifier.get(userId, identifierType)
+    return GetResourceKvpString(key(userId, identifierType))
+end
+
+---@param userId integer
 ---@return string[] identifiers
 function Storage.userToIdentifier.getAll(userId)
     local identifiers = {}
@@ -34,4 +41,5 @@ function Storage.userToIdentifier.delete(userId, identifierType)
     DeleteResourceKvpNoSync(key(userId, identifierType))
 end
 
+exports('getIdentifierFromUserId', Storage.userToIdentifier.get)
 exports('getIdentifiersFromUserId', Storage.userToIdentifier.getAll)
