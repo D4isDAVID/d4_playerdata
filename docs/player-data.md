@@ -32,10 +32,11 @@ the player, while your resources handle the rest.
 
 When a player joins the server, this resource collects their identifiers. If a
 linked User ID is found, then it is assigned to the player. If new and unlinked
-identifiers are found, they are also linked to the User ID. In the case that
-multiple User IDs are found, the oldest User ID is assigned. Existing identifier
-links are not modified, preventing accidental reassignment. If no linked User ID
-is found, a new one is created and linked to the identifiers.
+identifiers are found, they are also linked to the User ID. By default, in the
+case that multiple User IDs are found, the oldest User ID is assigned, and
+existing identifier links are not modified. This can be changed to migrate data
+to the oldest User ID, and delete the other User IDs. If no linked User ID is
+found, a new one is created and linked to the identifiers.
 
 Players are also given an ACE principal based on the User ID: `user.<UserId>`.
 

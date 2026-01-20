@@ -50,7 +50,13 @@ Convars = {
     allowDuplicateUsers = createConvarHandler(
         'playerdata_allowDuplicateUsers',
         false,
-        GetConvar
+        GetConvarBool
+    ),
+    ---@return boolean
+    migrateMultipleUsers = createConvarHandler(
+        'playerdata_migrateMultipleUsers',
+        false,
+        GetConvarBool
     ),
     ---@return table<string, true>
     requiredIdentifiers = createConvarHandler(

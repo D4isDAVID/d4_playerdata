@@ -40,6 +40,19 @@ simultaneously. Useful when using 2 clients with `-cl2`.
 - Type: `boolean`
 - Default: `false`
 
+### Migrate Multiple Users
+
+```
+set playerdata_migrateMultipleUsers true
+```
+
+Whether to migrate all Data IDs into one User ID when multiple User IDs are
+linked to a joining player. Data IDs and identifiers will be permanently moved
+to the oldest linked User ID, and the other User IDs will be deleted.
+
+- Type: `boolean`
+- Default: `true`
+
 ### Required Identifiers
 
 ```

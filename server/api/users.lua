@@ -14,20 +14,23 @@ function API.users.get(player)
 end
 
 ---@param identifiers string[]
----@return integer? userId
+---@return integer[] userIds
 function API.users.resolve(identifiers)
-    local userId
+    local set = {}
+    local userIds = {}
 
     for i = 1, #identifiers do
         local identifier = identifiers[i]
         local found = Storage.identifierToUser.get(identifier)
 
-        if found ~= nil and (userId == nil or found < userId) then
-            userId = found
+        if found ~= nil and not set[found] then
+            set[found] = true
+            userIds[#userIds + 1] = found
         end
     end
 
-    return userId
+    table.sort(userIds)
+    return userIds
 end
 
 ---@param userId integer
@@ -57,8 +60,18 @@ function API.users.ensure(player)
     player = tostring(player)
 
     local identifiers = Utils.getIdentifiers(player)
-    local userId = API.users.get(player) or API.users.resolve(identifiers)
+    local userId = API.users.get(player)
     local created = false
+
+    if userId == nil then
+        local resolved = API.users.resolve(identifiers)
+        userId = resolved[1]
+        if Convars.migrateMultipleUsers() then
+            for i = 2, #resolved do
+                API.users.migrate(resolved[i], userId)
+            end
+        end
+    end
 
     if userId == nil then
         if #identifiers == 0 then
