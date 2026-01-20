@@ -67,6 +67,19 @@ The returned table will be empty when offline.
 
 - `string[]` - The player Net IDs linked to the given User ID.
 
+### Delete User ID
+
+```
+exports.d4_playerdata:deleteUserId(userId)
+```
+
+Deletes the given User ID, and returns whether it was successful.
+Returns false if a player with the given User ID is currently connected.
+
+#### Parameters
+
+- `userId: integer` - The User ID.
+
 ### Get User ID From Identifier
 
 ```
@@ -100,6 +113,30 @@ Returns the identifiers linked to the given User ID.
 - `string[]` - The identifiers linked to the given User ID.
 
 ## Server Events
+
+### User Created
+
+```
+AddEventHandler('d4_playerdata:userCreated', function(userId) end)
+```
+
+Triggered after a User ID is created.
+
+#### Parameters
+
+- `userId: integer` - The created User ID.
+
+### User Deleted
+
+```
+AddEventHandler('d4_playerdata:userDeleted', function(userId) end)
+```
+
+Triggered after a User ID is deleted.
+
+#### Parameters
+
+- `userId: integer` - The deleted User ID.
 
 ### User Joined
 

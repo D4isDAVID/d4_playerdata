@@ -28,4 +28,10 @@ function Storage.userToIdentifier.set(userId, identifier)
     SetResourceKvpNoSync(key(userId, identifierType), identifier)
 end
 
+---@param userId integer
+---@param identifierType string
+function Storage.userToIdentifier.delete(userId, identifierType)
+    DeleteResourceKvpNoSync(key(userId, identifierType))
+end
+
 exports('getIdentifiersFromUserId', Storage.userToIdentifier.getAll)

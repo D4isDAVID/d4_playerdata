@@ -26,4 +26,9 @@ function Storage.dataToUser.set(dataId, userId)
     SetResourceKvpIntNoSync(key(dataId), userId)
 end
 
+---@param dataId integer
+function Storage.dataToUser.delete(dataId)
+    DeleteResourceKvpNoSync(key(dataId))
+end
+
 exports('getUserIdFromDataId', Storage.dataToUser.get)

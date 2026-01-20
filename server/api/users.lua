@@ -58,6 +58,7 @@ function API.users.ensure(player)
 
     local identifiers = Utils.getIdentifiers(player)
     local userId = API.users.get(player) or API.users.resolve(identifiers)
+    local created = false
 
     if userId == nil then
         if #identifiers == 0 then
@@ -65,6 +66,7 @@ function API.users.ensure(player)
         end
 
         userId = Storage.userId.increment()
+        created = true
     elseif API.users.isConnected(userId) and not Convars.allowDuplicateUsers() then
         return nil
     end
@@ -89,6 +91,9 @@ function API.users.ensure(player)
     print(('Player %s was assigned User ID %s'):format(player, userId))
 
     FlushResourceKvp()
+    if created then
+        TriggerEvent('d4_playerdata:userCreated', userId)
+    end
     TriggerEvent('d4_playerdata:userJoined', player, userId)
 
     return userId
@@ -99,7 +104,6 @@ function API.users.remove(player)
     player = tostring(player)
 
     local userId = playerToUserId[player]
-
     if userId == nil then
         return
     end
@@ -116,7 +120,36 @@ function API.users.remove(player)
     TriggerEvent('d4_playerdata:userLeft', player, userId)
 end
 
+---@param userId integer
+---@return boolean success
+function API.users.delete(userId)
+    if API.users.isConnected(userId) then
+        return false
+    end
+
+    local dataIds = Storage.userToData.getAll(userId)
+    local identifiers = Storage.userToIdentifier.getAll(userId)
+
+    for i = 1, #dataIds do
+        if not API.data.delete(dataIds[i]) then
+            return false
+        end
+    end
+
+    for i = 1, #identifiers do
+        local identifier = identifiers[i]
+        Storage.identifierToUser.delete(identifier)
+        Storage.userToIdentifier.delete(userId, identifier)
+    end
+
+    FlushResourceKvp()
+    TriggerEvent('d4_playerdata:userDeleted', userId)
+
+    return true
+end
+
 exports('getUserId', API.users.get)
 exports('resolveUserId', API.users.resolve)
 exports('isUserIdConnected', API.users.isConnected)
 exports('getPlayersFromUserId', API.users.getPlayers)
+exports('deleteUserId', API.users.delete)

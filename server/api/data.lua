@@ -83,7 +83,30 @@ function API.data.create(userId)
     Storage.userToData.set(userId, dataId)
 
     FlushResourceKvp()
+    TriggerEvent('d4_playerdata:dataCreated', dataId, userId)
+
     return dataId
+end
+
+---@param dataId integer
+---@return boolean success
+function API.data.delete(dataId)
+    if API.data.getPlayer(dataId) ~= nil then
+        return false
+    end
+
+    local userId = Storage.dataToUser.get(dataId)
+    if userId == nil then
+        return false
+    end
+
+    Storage.dataToUser.delete(dataId)
+    Storage.userToData.delete(userId, dataId)
+
+    FlushResourceKvp()
+    TriggerEvent('d4_playerdata:dataDeleted', dataId, userId)
+
+    return true
 end
 
 ---@param player unknown
@@ -122,6 +145,7 @@ exports('getPlayerFromDataId', API.data.getPlayer)
 exports('assignDataId', API.data.assign)
 exports('unassignDataId', API.data.unassign)
 exports('createDataId', API.data.create)
+exports('deleteDataId', API.data.delete)
 exports('disableDataAutoAssign', function()
     if not autoAssign then
         return

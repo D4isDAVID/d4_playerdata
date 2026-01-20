@@ -89,6 +89,20 @@ Creates a new Data ID and links it to the given User ID.
 
 - `integer` - The created Data ID.
 
+### Delete Data ID
+
+```
+exports.d4_playerdata:deleteDataId(dataId)
+```
+
+Deletes the given Data ID, and returns whether it was successful.
+Returns false if the Data ID does not exist, or if a player with the given Data
+ID is currently connected.
+
+#### Parameters
+
+- `dataId: integer` - The Data ID.
+
 ### Disable Data Auto Assignment
 
 ```
@@ -149,6 +163,32 @@ Returns whether the given Data IDs is linked to the given User ID.
 - `boolean` - Whether the given Data ID is linked to the given User ID.
 
 ## Server Events
+
+### Data Created
+
+```
+AddEventHandler('d4_playerdata:dataCreated', function(dataId, userId) end)
+```
+
+Triggered after a Data ID is created.
+
+#### Parameters
+
+- `dataId: integer` - The created Data ID.
+- `userId: integer` - The User ID linked to the created Data ID.
+
+### Data Deleted
+
+```
+AddEventHandler('d4_playerdata:dataDeleted', function(dataId, userId) end)
+```
+
+Triggered after a Data ID is deleted.
+
+#### Parameters
+
+- `dataId: integer` - The deleted Data ID.
+- `userId: integer` - The User ID linked to the deleted Data ID.
 
 ### Data Assigned
 
