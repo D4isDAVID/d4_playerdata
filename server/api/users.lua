@@ -54,6 +54,69 @@ function API.users.getPlayers(userId)
     return players
 end
 
+---@param userId integer
+---@return boolean success
+function API.users.delete(userId)
+    if API.users.isConnected(userId) then
+        return false
+    end
+
+    local dataIds = Storage.userToData.getAll(userId)
+    local identifiers = Storage.userToIdentifier.getAll(userId)
+
+    for i = 1, #dataIds do
+        if not API.data.delete(dataIds[i]) then
+            return false
+        end
+    end
+
+    for i = 1, #identifiers do
+        local identifier = identifiers[i]
+        Storage.identifierToUser.delete(identifier)
+        Storage.userToIdentifier.delete(userId, identifier)
+    end
+
+    FlushResourceKvp()
+    TriggerEvent('d4_playerdata:userDeleted', userId)
+
+    return true
+end
+
+---@param oldUserId integer
+---@param newUserId integer
+---@return boolean success
+function API.users.migrate(oldUserId, newUserId)
+    if oldUserId == newUserId or API.users.isConnected(oldUserId) then
+        return false
+    end
+
+    local dataIds = Storage.userToData.getAll(oldUserId)
+    local identifiers = Storage.userToIdentifier.getAll(oldUserId)
+
+    for i = 1, #dataIds do
+        if not API.data.migrate(dataIds[i], newUserId) then
+            return false
+        end
+    end
+
+    for i = 1, #identifiers do
+        local identifier = identifiers[i]
+        local idType = Utils.getIdentifierType(identifier)
+
+        if not Storage.userToIdentifier.get(newUserId, idType) then
+            Storage.identifierToUser.set(identifier, newUserId)
+            Storage.userToIdentifier.set(newUserId, identifier)
+        end
+    end
+
+    FlushResourceKvp()
+    TriggerEvent('d4_playerdata:userMigrated', oldUserId, newUserId)
+
+    API.users.delete(oldUserId)
+
+    return true
+end
+
 ---@param player unknown
 ---@return integer? userId
 function API.users.ensure(player)
@@ -131,69 +194,6 @@ function API.users.remove(player)
     Utils.removePlayerPrincipal(player, Utils.getUserAceName(userId))
     print(('Player %s was unassigned User ID %s'):format(player, userId))
     TriggerEvent('d4_playerdata:userLeft', player, userId)
-end
-
----@param userId integer
----@return boolean success
-function API.users.delete(userId)
-    if API.users.isConnected(userId) then
-        return false
-    end
-
-    local dataIds = Storage.userToData.getAll(userId)
-    local identifiers = Storage.userToIdentifier.getAll(userId)
-
-    for i = 1, #dataIds do
-        if not API.data.delete(dataIds[i]) then
-            return false
-        end
-    end
-
-    for i = 1, #identifiers do
-        local identifier = identifiers[i]
-        Storage.identifierToUser.delete(identifier)
-        Storage.userToIdentifier.delete(userId, identifier)
-    end
-
-    FlushResourceKvp()
-    TriggerEvent('d4_playerdata:userDeleted', userId)
-
-    return true
-end
-
----@param oldUserId integer
----@param newUserId integer
----@return boolean success
-function API.users.migrate(oldUserId, newUserId)
-    if oldUserId == newUserId or API.users.isConnected(oldUserId) then
-        return false
-    end
-
-    local dataIds = Storage.userToData.getAll(oldUserId)
-    local identifiers = Storage.userToIdentifier.getAll(oldUserId)
-
-    for i = 1, #dataIds do
-        if not API.data.migrate(dataIds[i], newUserId) then
-            return false
-        end
-    end
-
-    for i = 1, #identifiers do
-        local identifier = identifiers[i]
-        local idType = Utils.getIdentifierType(identifier)
-
-        if not Storage.userToIdentifier.get(newUserId, idType) then
-            Storage.identifierToUser.set(identifier, newUserId)
-            Storage.userToIdentifier.set(newUserId, identifier)
-        end
-    end
-
-    FlushResourceKvp()
-    TriggerEvent('d4_playerdata:userMigrated', oldUserId, newUserId)
-
-    API.users.delete(oldUserId)
-
-    return true
 end
 
 exports('getUserId', API.users.get)
