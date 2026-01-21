@@ -17,6 +17,19 @@ function Storage.userToIdentifier.get(userId, identifierType)
 end
 
 ---@param userId integer
+---@return boolean exists
+function Storage.userToIdentifier.hasAny(userId)
+    local exists = false
+
+    Utils.searchKvp(key(userId), function()
+        exists = true
+        return true
+    end)
+
+    return exists
+end
+
+---@param userId integer
 ---@return string[] identifiers
 function Storage.userToIdentifier.getAll(userId)
     local identifiers = {}

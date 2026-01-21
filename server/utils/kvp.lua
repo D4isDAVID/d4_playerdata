@@ -1,7 +1,7 @@
 Utils.kvp = {}
 
 ---@param prefix string
----@param func fun(key: string)
+---@param func fun(key: string): boolean?
 function Utils.searchKvp(prefix, func)
     local handle = StartFindKvp(prefix)
 
@@ -13,8 +13,8 @@ function Utils.searchKvp(prefix, func)
     repeat
         key = FindKvp(handle)
 
-        if key ~= nil then
-            func(key)
+        if key ~= nil and func(key) then
+            break
         end
     until key == nil
 

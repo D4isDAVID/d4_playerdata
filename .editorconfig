@@ -57,7 +57,8 @@ align_continuous_similar_call_args = false
 align_continuous_inline_comment = false
 
 # [indent]
-never_indent_before_if_condition = true # will be overriden to true if align_if_branch is true
+# will be overriden to true if align_if_branch is true
+never_indent_before_if_condition = true
 never_indent_comment_on_if_branch = true
 keep_indents_on_empty_lines = false
 allow_non_indented_comments = false

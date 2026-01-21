@@ -6,11 +6,17 @@ local playerToPersistId = {}
 local persistIdToPlayers = {}
 
 ---@param player unknown
----@return integer? userId
+---@return integer? persistId
 function API.persist.get(player)
     player = tostring(player)
 
     return playerToPersistId[player]
+end
+
+---@param persistId integer
+---@return boolean exists
+function API.persist.exists(persistId)
+    return Storage.persistToIdentifier.hasAny(persistId)
 end
 
 ---@param tokens string[]
@@ -168,7 +174,12 @@ function API.persist.remove(player)
 end
 
 ---@param persistId integer
+---@return boolean success
 function API.persist.ban(persistId)
+    if not API.persist.exists(persistId) or Storage.persistBan.exists(persistId) then
+        return false
+    end
+
     Storage.persistBan.set(persistId)
     FlushResourceKvp()
 
@@ -180,17 +191,27 @@ function API.persist.ban(persistId)
             DropPlayer(players[i], 'You have been banned from the server.')
         end
     end
+
+    return true
 end
 
 ---@param persistId integer
+---@return boolean success
 function API.persist.unban(persistId)
+    if not API.persist.exists(persistId) or not Storage.persistBan.exists(persistId) then
+        return false
+    end
+
     Storage.persistBan.delete(persistId)
     FlushResourceKvp()
 
     print(('Persist ID %s has been unbanned'):format(persistId))
+
+    return true
 end
 
 exports('getPersistId', API.persist.get)
+exports('doesPersistIdExist', API.persist.exists)
 exports('resolvePersistIds', API.persist.resolve)
 exports('banPersistId', API.persist.ban)
 exports('unbanPersistId', API.persist.unban)

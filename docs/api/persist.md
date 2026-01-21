@@ -22,6 +22,22 @@ Returns the given player's Persist ID.
 
 - `integer?` - The player's Persist ID.
 
+### Does Persist ID Exist
+
+```
+exports.d4_playerdata:doesPersistIdExist(persistId)
+```
+
+Returns whether a given Persist ID exists.
+
+#### Parameters
+
+- `persistId: integer` - The Persist ID.
+
+#### Returns
+
+- `boolean` - Whether the given Persist ID exists.
+
 ### Resolve Persist IDs from Tokens and Identifiers
 
 ```
@@ -157,11 +173,16 @@ Returns whether a given Persist ID is banned from the server.
 exports.d4_playerdata:banPersistId(persistId)
 ```
 
-Bans the given Persist ID.
+Bans the given Persist ID and returns whether it was successful.
+Returns false if the Persist ID doesn't exist, or it's already banned.
 
 #### Parameters
 
 - `persistId: integer` - The Persist ID.
+
+#### Returns
+
+- `boolean` - Whether the given Persist ID was banned.
 
 ### Unban Persist ID
 
@@ -169,8 +190,13 @@ Bans the given Persist ID.
 exports.d4_playerdata:unbanPersistId(persistId)
 ```
 
-Unbans the given Persist ID.
+Unbans the given Persist ID and returns whether it was successful.
+Returns false if the Persist ID doesn't exist, or it's not banned.
 
 #### Parameters
 
 - `persistId: integer` - The Persist ID.
+
+#### Returns
+
+- `boolean` - Whether the given Persist ID was unbanned.

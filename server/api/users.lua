@@ -13,6 +13,12 @@ function API.users.get(player)
     return playerToUserId[player]
 end
 
+---@param userId integer
+---@return boolean exists
+function API.users.exists(userId)
+    return Storage.userToIdentifier.hasAny(userId)
+end
+
 ---@param identifiers string[]
 ---@return integer[] userIds
 function API.users.resolve(identifiers)
@@ -57,6 +63,10 @@ end
 ---@param userId integer
 ---@return boolean success
 function API.users.delete(userId)
+    if not API.users.exists(userId) then
+        return false
+    end
+
     if API.users.isConnected(userId) then
         return false
     end
@@ -88,7 +98,10 @@ end
 ---@param newUserId integer
 ---@return boolean success
 function API.users.migrate(oldUserId, newUserId)
-    if oldUserId == newUserId or API.users.isConnected(oldUserId) then
+    if not API.users.exists(oldUserId)
+    or not API.users.exists(newUserId)
+    or oldUserId == newUserId
+    or API.users.isConnected(oldUserId) then
         return false
     end
 
@@ -203,6 +216,7 @@ function API.users.remove(player)
 end
 
 exports('getUserId', API.users.get)
+exports('doesUserIdExist', API.users.exists)
 exports('resolveUserIds', API.users.resolve)
 exports('isUserIdConnected', API.users.isConnected)
 exports('getPlayersFromUserId', API.users.getPlayers)

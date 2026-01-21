@@ -16,6 +16,12 @@ function API.data.get(player)
 end
 
 ---@param dataId integer
+---@return boolean exists
+function API.data.exists(dataId)
+    return Storage.dataToUser.get(dataId) ~= nil
+end
+
+---@param dataId integer
 ---@return unknown? player
 function API.data.getPlayer(dataId)
     return dataIdToPlayer[dataId]
@@ -75,8 +81,12 @@ function API.data.unassign(player)
 end
 
 ---@param userId integer
----@return integer dataId
+---@return integer? dataId
 function API.data.create(userId)
+    if not API.users.exists(userId) then
+        return nil
+    end
+
     local dataId = Storage.dataId.increment()
 
     Storage.dataToUser.set(dataId, userId)
@@ -165,6 +175,7 @@ function API.data.autoAssign(player)
 end
 
 exports('getDataId', API.data.get)
+exports('doesDataIdExist', API.data.exists)
 exports('getPlayerFromDataId', API.data.getPlayer)
 exports('assignDataId', API.data.assign)
 exports('unassignDataId', API.data.unassign)

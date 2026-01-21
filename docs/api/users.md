@@ -23,6 +23,22 @@ Returns the given player's User ID.
 
 - `integer?` - The player's User ID.
 
+### Does User ID Exist
+
+```
+exports.d4_playerdata:doesUserIdExist(userId)
+```
+
+Returns whether a given User ID exists.
+
+#### Parameters
+
+- `userId: integer` - The User ID.
+
+#### Returns
+
+- `boolean` - Whether the given User ID exists.
+
 ### Resolve User IDs from Identifiers
 
 ```
@@ -79,8 +95,8 @@ exports.d4_playerdata:deleteUserId(userId)
 ```
 
 Deletes the given User ID, and returns whether it was successful.
-Returns false if a player with the given User ID is currently connected, or it
-failed to delete a Data ID.
+Returns false if the given User ID does not exist, a player with the given User
+ID is currently connected, or it failed to delete a Data ID.
 
 #### Parameters
 
@@ -98,8 +114,11 @@ exports.d4_playerdata:migrateUserId(oldUserId, newUserId)
 
 Moves Data IDs and identifiers from one User ID to another, and returns whether
 it was successful. Only identifier types that don't exist on the new User ID are
-moved. Returns false if the given old and new User IDs are equal, a player with
-the old User ID is currently connected, or it failed to migrate a Data ID.
+moved.
+
+Returns false if the given old and new User IDs are equal or don't exist, a
+player with the old User ID is currently connected, or it failed to migrate a
+Data ID.
 
 #### Parameters
 

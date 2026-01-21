@@ -23,6 +23,22 @@ Returns the Data ID assigned to the given player, or `nil` if not assigned.
 
 - `integer?` - The assigned Data ID, or `nil` of not assigned.
 
+### Does Data ID Exist
+
+```
+exports.d4_playerdata:doesDataIdExist(dataId)
+```
+
+Returns whether a given Data ID exists.
+
+#### Parameters
+
+- `dataId: integer` - The Data ID.
+
+#### Returns
+
+- `boolean` - Whether the given Data ID exists.
+
 ### Get Player Assigned to Data ID
 
 ```
@@ -84,7 +100,8 @@ Returns false if the given player has no assigned Data ID.
 exports.d4_playerdata:createDataId(userId)
 ```
 
-Creates a new Data ID and links it to the given User ID.
+Creates and returns a new Data ID and links it to a given User ID, or `nil` if
+the given User ID doesn't exist.
 
 #### Parameters
 
@@ -92,7 +109,7 @@ Creates a new Data ID and links it to the given User ID.
 
 #### Returns
 
-- `integer` - The created Data ID.
+- `integer?` - The created Data ID, or `nil` if the given User ID doesn't exist.
 
 ### Delete Data ID
 

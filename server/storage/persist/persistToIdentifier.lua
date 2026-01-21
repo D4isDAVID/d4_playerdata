@@ -10,6 +10,19 @@ local function key(persistId, identifier)
 end
 
 ---@param persistId integer
+---@return boolean exists
+function Storage.persistToIdentifier.hasAny(persistId)
+    local exists = false
+
+    Utils.searchKvp(key(persistId), function()
+        exists = true
+        return true
+    end)
+
+    return exists
+end
+
+---@param persistId integer
 ---@return string[] identifiers
 function Storage.persistToIdentifier.getAll(persistId)
     local identifiers = {}
