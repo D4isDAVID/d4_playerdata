@@ -1,14 +1,23 @@
 ---@param player unknown
 local function initPlayer(player)
+    if Convars.usePersistIds() then
+        local persistId = API.persist.ensure(player)
+        if persistId == nil then
+            print(('Player %s did not get a Persist ID'):format(player))
+            DropPlayer(player, 'Failed to assign a Persist ID.')
+            return
+        end
+    end
+
     local userId = API.users.ensure(player)
-    if not userId then
+    if userId == nil then
         print(('Player %s did not get a User ID'):format(player))
         DropPlayer(player, 'Failed to assign a User ID.')
         return
     end
 
     local dataId = API.data.autoAssign(player)
-    if dataId and not API.data.assign(player, dataId) then
+    if dataId ~= nil and not API.data.assign(player, dataId) then
         print(('Player %s did not get Data ID %s'):format(player, dataId))
         DropPlayer(player, ('Failed to assign Data ID %s.'):format(dataId))
         return
@@ -17,15 +26,9 @@ end
 
 ---@param player unknown
 local function removePlayer(player)
-    local dataId = API.data.get(player)
-    if dataId then
-        API.data.unassign(player)
-    end
-
-    local userId = API.users.get(player)
-    if userId then
-        API.users.remove(player)
-    end
+    API.data.unassign(player)
+    API.users.remove(player)
+    API.persist.remove(player)
 end
 
 Utils.onResourceStop(function()

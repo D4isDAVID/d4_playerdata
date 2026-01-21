@@ -47,6 +47,12 @@ end
 
 Convars = {
     ---@return boolean
+    usePersistIds = createConvarHandler(
+        'playerdata_usePersistIds',
+        true,
+        GetConvarBool
+    ),
+    ---@return boolean
     allowDuplicateUsers = createConvarHandler(
         'playerdata_allowDuplicateUsers',
         false,

@@ -4,6 +4,8 @@
 > This resource assigns players a persistent User ID linked to player
 > identifiers, and provides Data IDs for data similar to characters or save
 > files. Use User IDs for identity, and Data IDs for gameplay state.
+> In addition, this resource provides an optional Persist ID linked to player
+> tokens, identifiers, and User IDs, for effective bans.
 
 The main functionality of this resource is identifying players and assigning
 them persistent User and Data IDs. This document explains the purpose and
@@ -52,7 +54,22 @@ IDs.
 
 By default, when a player joins, this resource automatically assigns the first
 Data ID linked to the player's User ID, or creates one if none exist. Other
-resources can disable this functionality to implement their own Data ID
-assignments, such as a character selection screen.
+resources can disable this functionality by running the
+`exports.d4_playerdata:disableDataAutoAssign()` export when this resource
+starts, to implement their own Data ID assignments, such as a character
+selection screen.
 
 Players are also given an ACE principal based on the Data ID: `data.<DataId>`.
+
+## Persist IDs
+
+To ban players effectively, FiveM provides us with player hardware tokens, in
+addition to identifiers. This allows servers to ban a player's entire machine,
+network (with the `ip` identifier), and more. When a player joins the server,
+this resource collects their tokens and identifiers and links them to a
+Persist ID. Any User IDs linked to the player are linked to the Persist ID as
+well. The Persist ID is an integer value assigned to players, intended for
+effective banning.
+
+This functionality is optional, and can be disabled with the
+`playerdata_usePersistIds` convar.

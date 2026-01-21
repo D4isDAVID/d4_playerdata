@@ -6,6 +6,19 @@ end
 
 ---@param player unknown
 ---@return string[]
+function Utils.getTokens(player)
+    ---@type string[]
+    local tokens = {}
+
+    for i = 0, GetNumPlayerTokens(player) - 1 do
+        tokens[#tokens + 1] = GetPlayerToken(player, i)
+    end
+
+    return tokens
+end
+
+---@param player unknown
+---@return string[]
 function Utils.getIdentifiers(player)
     local ignoredIdentifiers = Convars.ignoredIdentifiers()
     ---@type string[]

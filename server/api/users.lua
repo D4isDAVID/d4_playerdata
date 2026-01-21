@@ -1,8 +1,8 @@
 API.users = {}
 
----@type table<unknown, integer>
+---@type table<string, integer>
 local playerToUserId = {}
----@type table<integer, table<unknown, true>>
+---@type table<integer, table<string, true>>
 local userIdToPlayers = {}
 
 ---@param player unknown
@@ -75,6 +75,8 @@ function API.users.delete(userId)
         Storage.identifierToUser.delete(identifier)
         Storage.userToIdentifier.delete(userId, identifier)
     end
+
+    API.persist.unlinkUser(userId)
 
     FlushResourceKvp()
     TriggerEvent('d4_playerdata:userDeleted', userId)
@@ -153,6 +155,11 @@ function API.users.ensure(player)
     end
     userIdToPlayers[userId][player] = true
 
+    local persistId = API.persist.get(player)
+    if persistId ~= nil then
+        API.persist.linkUser(persistId, userId)
+    end
+
     for i = 1, #identifiers do
         local identifier = identifiers[i]
         local found = Storage.identifierToUser.get(identifier)
@@ -186,7 +193,6 @@ function API.users.remove(player)
 
     playerToUserId[player] = nil
     userIdToPlayers[userId][player] = nil
-
     if next(userIdToPlayers[userId]) == nil then
         userIdToPlayers[userId] = nil
     end

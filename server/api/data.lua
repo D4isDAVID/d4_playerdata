@@ -1,8 +1,8 @@
 API.data = {}
 
----@type table<unknown, integer>
+---@type table<string, integer>
 local playerToDataId = {}
----@type table<integer, unknown>
+---@type table<integer, string>
 local dataIdToPlayer = {}
 
 local autoAssign = true
