@@ -134,3 +134,43 @@ Returns the User IDs linked to the given Persist ID.
 #### Returns
 
 - `integer[]` - The User IDs linked to the given Persist ID.
+
+### Is Persist ID Banned
+
+```
+exports.d4_playerdata:isPersistIdBanned(persistId)
+```
+
+Returns whether a given Persist ID is banned from the server.
+
+#### Parameters
+
+- `persistId: integer` - The Persist ID.
+
+#### Returns
+
+- `boolean` - Whether the given Persist ID is banned.
+
+### Ban Persist ID
+
+```
+exports.d4_playerdata:banPersistId(persistId)
+```
+
+Bans the given Persist ID.
+
+#### Parameters
+
+- `persistId: integer` - The Persist ID.
+
+### Unban Persist ID
+
+```
+exports.d4_playerdata:unbanPersistId(persistId)
+```
+
+Unbans the given Persist ID.
+
+#### Parameters
+
+- `persistId: integer` - The Persist ID.

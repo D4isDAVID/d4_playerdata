@@ -218,3 +218,19 @@ Used to search for User IDs linked to a given Persist ID.
 #### Returns
 
 - `integer` - The given User ID.
+
+### Persist ID Ban
+
+```
+persistBan:<persistId>
+```
+
+Used to check if a given Persist ID is banned.
+
+#### Parameters
+
+- `persistId: integer` - The Persist ID.
+
+#### Returns
+
+- `integer` - The given Persist ID.

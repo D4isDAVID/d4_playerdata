@@ -97,11 +97,17 @@ local function migrate(oldPersistId, newPersistId)
         API.persist.linkUser(newPersistId, userId)
         Storage.persistToUser.delete(oldPersistId, userId)
     end
+
+    if Storage.persistBan.exists(oldPersistId) then
+        Storage.persistBan.set(newPersistId)
+        Storage.persistBan.delete(oldPersistId)
+    end
 end
 
 ---@param player unknown
+---@param createMissing boolean
 ---@return integer? persistId
-function API.persist.ensure(player)
+function API.persist.ensure(player, createMissing)
     player = tostring(player)
 
     local tokens = Utils.getTokens(player)
@@ -116,6 +122,10 @@ function API.persist.ensure(player)
 
     local persistId = persistIds[1]
     if persistId == nil then
+        if not createMissing then
+            return nil
+        end
+
         persistId = Storage.persistId.increment()
     end
 
@@ -157,5 +167,30 @@ function API.persist.remove(player)
     end
 end
 
+---@param persistId integer
+function API.persist.ban(persistId)
+    Storage.persistBan.set(persistId)
+    FlushResourceKvp()
+
+    print(('Persist ID %s has been banned'):format(persistId))
+
+    local players = persistIdToPlayers[persistId]
+    if players ~= nil then
+        for i = 1, #players do
+            DropPlayer(players[i], 'You have been banned from the server.')
+        end
+    end
+end
+
+---@param persistId integer
+function API.persist.unban(persistId)
+    Storage.persistBan.delete(persistId)
+    FlushResourceKvp()
+
+    print(('Persist ID %s has been unbanned'):format(persistId))
+end
+
 exports('getPersistId', API.persist.get)
 exports('resolvePersistIds', API.persist.resolve)
+exports('banPersistId', API.persist.ban)
+exports('unbanPersistId', API.persist.unban)

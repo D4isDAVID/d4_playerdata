@@ -1,7 +1,7 @@
 ---@param player unknown
 local function initPlayer(player)
     if Convars.usePersistIds() then
-        local persistId = API.persist.ensure(player)
+        local persistId = API.persist.ensure(player, true)
         if persistId == nil then
             print(('Player %s did not get a Persist ID'):format(player))
             DropPlayer(player, 'Failed to assign a Persist ID.')
