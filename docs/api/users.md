@@ -1,8 +1,13 @@
 # Users API
 
+## Table of Contents
+
+- [Server Exports](#server-exports)
+- [Server Events](#server-events)
+
 ## Server Exports
 
-### Get User ID From Player
+### Get User ID from Player
 
 ```
 exports.d4_playerdata:getUserId(player)
@@ -18,13 +23,13 @@ Returns the given player's User ID.
 
 - `integer?` - The player's User ID.
 
-### Resolve User ID From Identifiers
+### Resolve User IDs from Identifiers
 
 ```
-exports.d4_playerdata:resolveUserId(identifiers)
+exports.d4_playerdata:resolveUserIds(identifiers)
 ```
 
-Resolves and returns a User ID based on the given identifiers.
+Resolves and returns User IDs based on the given identifiers.
 
 #### Parameters
 
@@ -32,7 +37,7 @@ Resolves and returns a User ID based on the given identifiers.
 
 #### Returns
 
-- `integer?` - The resolved User ID.
+- `integer[]` - The resolved User IDs.
 
 ### Is User ID Connected
 
@@ -50,7 +55,7 @@ Returns whether the given User ID is connected to the server.
 
 - `boolean` - Whether the given User ID is connected.
 
-### Get Players From User ID
+### Get Players from User ID
 
 ```
 exports.d4_playerdata:getPlayersFromUserId(userId)
@@ -105,7 +110,7 @@ the old User ID is currently connected, or it failed to migrate a Data ID.
 
 - `boolean` - Whether the migration was successful.
 
-### Get User ID From Identifier
+### Get User ID from Identifier
 
 ```
 exports.d4_playerdata:getUserIdFromIdentifier(identifier)
@@ -121,7 +126,7 @@ Returns the User ID linked to the given identifier.
 
 - `integer?` - The User ID linked to the given identifier.
 
-### Get Identifier From User ID
+### Get Identifier from User ID
 
 ```
 exports.d4_playerdata:getIdentifierFromUserId(userId, identifierType)
@@ -138,7 +143,7 @@ Returns the identifier of the given type linked to the given User ID.
 
 - `string?` - The identifier of the given type linked to the given User ID.
 
-### Get Identifiers From User ID
+### Get Identifiers from User ID
 
 ```
 exports.d4_playerdata:getIdentifiersFromUserId(userId)

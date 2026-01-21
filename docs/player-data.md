@@ -11,9 +11,16 @@ The main functionality of this resource is identifying players and assigning
 them persistent User and Data IDs. This document explains the purpose and
 behavior of these IDs.
 
-Please read the following links for more context:
+Please read the following links for additional context:
 - [Identifier Types](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/GetPlayerIdentifiers/#identifier-types)
 - [Basic Aces & Principals overview/guide](https://forum.cfx.re/t/90917)
+- [`GetPlayerToken`](https://docs.fivem.net/natives/?_0x54C06897)
+
+## Table of Contents
+
+- [User IDs](#user-ids)
+- [Data IDs](#data-ids)
+- [Persist IDs](#persist-ids)
 
 ## User IDs
 

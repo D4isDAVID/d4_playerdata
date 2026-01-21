@@ -1,5 +1,11 @@
 # User Guide
 
+## Table of Contents
+
+- [Installation](#installation)
+- [Usage](#usage)
+- [Configuration](#configuration)
+
 ## Installation
 
 To install the resource, download the [latest release], extract it, and place

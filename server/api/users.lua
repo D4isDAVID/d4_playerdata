@@ -203,7 +203,7 @@ function API.users.remove(player)
 end
 
 exports('getUserId', API.users.get)
-exports('resolveUserId', API.users.resolve)
+exports('resolveUserIds', API.users.resolve)
 exports('isUserIdConnected', API.users.isConnected)
 exports('getPlayersFromUserId', API.users.getPlayers)
 exports('deleteUserId', API.users.delete)

@@ -1,5 +1,10 @@
 # Data API
 
+## Table of Contents
+
+- [Server Exports](#server-exports)
+- [Server Events](#server-events)
+
 ## Server Exports
 
 ### Get Data ID Assigned to Player
@@ -56,7 +61,7 @@ successful. Returns false if:
 
 - `boolean` - Whether the assignment was successful.
 
-### Unassign Data ID From Player
+### Unassign Data ID from Player
 
 ```
 exports.d4_playerdata:unassignDataId(player)
@@ -136,7 +141,7 @@ A one-time function to disable automatically assigning the first Data ID to a
 player. Use this if a different resource will handle data assignment, such as a
 character selection resource.
 
-### Get User ID From Data ID
+### Get User ID from Data ID
 
 ```
 exports.d4_playerdata:getUserIdFromDataId(dataId)
@@ -152,7 +157,7 @@ Returns the User ID linked to the given Data ID.
 
 - `integer?` - The User ID linked to the given Data ID.
 
-### Get Data IDs From User ID
+### Get Data IDs from User ID
 
 ```
 exports.d4_playerdata:getDataIdsFromUserId(userId)

@@ -1,5 +1,9 @@
 # Persist API
 
+## Table of Contents
+
+- [Server Exports](#server-exports)
+
 ## Server Exports
 
 ### Get Persist ID from Player
