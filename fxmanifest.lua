@@ -14,7 +14,7 @@ server_scripts {
     'server/init.lua',
     'server/convars.lua',
     'server/utils/*.lua',
-    'server/storage/*.lua',
+    'server/storage/**.lua',
     'server/api/*.lua',
     'server/connecting.lua',
     'server/players.lua',
