@@ -12,8 +12,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - User IDs.
+- Data IDs.
+- Persist IDs.
+- User ID migration.
 - Option for required identifiers.
 - Option for ignored identifiers.
-- Data IDs.
 
 [unreleased commits]: https://github.com/D4isDAVID/d4_playerdata/commits/main
