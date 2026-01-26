@@ -61,9 +61,9 @@ IDs.
 
 By default, when a player joins, this resource automatically assigns the first
 Data ID linked to the player's User ID, or creates one if none exist. Other
-resources can disable this functionality by running the
-`exports.d4_playerdata:disableDataAutoAssign()` export when this resource
-starts, to implement their own Data ID assignments, such as a character
+resources can disable this functionality by adding the
+`d4_playerdata_disableDataAutoAssign 'yes'` metadata to their `fxmanifest.lua`
+file, to implement their own Data ID assignments, such as a character
 selection screen.
 
 Players are also given an ACE principal based on the Data ID: `data.<DataId>`.

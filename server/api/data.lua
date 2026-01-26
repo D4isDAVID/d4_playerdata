@@ -174,6 +174,21 @@ function API.data.autoAssign(player)
     return dataId
 end
 
+---@param enabled boolean
+---@param resource string?
+function API.data.toggleAutoAssign(enabled, resource)
+    autoAssign = enabled
+
+    if autoAssign then
+        print(
+            'Data ID auto assignment has been re-enabled as the resources disabling it have been stopped'
+        )
+    else
+        print(('Data ID auto assignment has been disabled by resource %s')
+            :format(resource))
+    end
+end
+
 exports('getDataId', API.data.get)
 exports('doesDataIdExist', API.data.exists)
 exports('getPlayerFromDataId', API.data.getPlayer)
@@ -182,12 +197,3 @@ exports('unassignDataId', API.data.unassign)
 exports('createDataId', API.data.create)
 exports('deleteDataId', API.data.delete)
 exports('migrateDataId', API.data.migrate)
-exports('disableDataAutoAssign', function()
-    if not autoAssign then
-        return
-    end
-
-    autoAssign = false
-    print(('Data ID auto assignment has been disabled by resource %s')
-        :format(GetInvokingResource()))
-end)

@@ -2,8 +2,21 @@
 
 ## Table of Contents
 
+- [Resource Metadata](#resource-metadata)
 - [Server Exports](#server-exports)
 - [Server Events](#server-events)
+
+## Resource Metadata
+
+### Disable Data Auto Assignment
+
+```
+d4_playerdata_disableDataAutoAssign 'yes'
+```
+
+Disables automatically assigning the first Data ID to a player upon joining. Add
+this to your resource's `fxmanifest.lua` file to manually handle data assignment
+in resources such as character selection screens.
 
 ## Server Exports
 
@@ -147,16 +160,6 @@ User ID, or a player with the given Data ID is currently connected.
 #### Returns
 
 - `boolean` - Whether the migration was successful.
-
-### Disable Data Auto Assignment
-
-```
-exports.d4_playerdata:disableDataAutoAssign()
-```
-
-A one-time function to disable automatically assigning the first Data ID to a
-player. Use this if a different resource will handle data assignment, such as a
-character selection resource.
 
 ### Get User ID from Data ID
 
