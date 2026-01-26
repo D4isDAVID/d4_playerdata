@@ -8,8 +8,8 @@
 > tokens, identifiers, and User IDs, for effective bans.
 
 The main functionality of this resource is identifying players and assigning
-them persistent User and Data IDs. This document explains the purpose and
-behavior of these IDs.
+them persistent User, Data, and Persist IDs. This document explains the purpose
+and behavior of these IDs.
 
 Please read the following links for additional context:
 - [Identifier Types](https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/GetPlayerIdentifiers/#identifier-types)
@@ -77,6 +77,10 @@ this resource collects their tokens and identifiers and links them to a
 Persist ID. Any User IDs linked to the player are linked to the Persist ID as
 well. The Persist ID is an integer value assigned to players, intended for
 effective banning.
+
+Since Persist IDs use the `ip` identifier and hardware tokens, it is unreliable
+to use for data storage of any kind. Avoid using Persist IDs for data storage of
+any kind.
 
 This functionality is optional, and can be disabled with the
 `d4_playerdata_usePersistIds` convar.
