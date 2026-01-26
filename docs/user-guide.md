@@ -37,7 +37,7 @@ without restarting the resource. Below are the available convars.
 ### Allow Duplicate Users
 
 ```
-set playerdata_allowDuplicateUsers false
+set d4_playerdata_allowDuplicateUsers false
 ```
 
 Whether to allow multiple players with the same User ID to join the server
@@ -49,7 +49,7 @@ simultaneously. Useful when using 2 clients with `-cl2`.
 ### Migrate Multiple Users
 
 ```
-set playerdata_migrateMultipleUsers true
+set d4_playerdata_migrateMultipleUsers true
 ```
 
 Whether to migrate all Data IDs into one User ID when multiple User IDs are
@@ -62,7 +62,7 @@ to the oldest linked User ID, and the other User IDs will be deleted.
 ### Required Identifiers
 
 ```
-set playerdata_requiredIdentifiers []
+set d4_playerdata_requiredIdentifiers []
 ```
 
 A set of [identifier types] to require. Players missing a required identifier
@@ -74,7 +74,7 @@ type will be rejected during connection.
 ### Ignored Identifiers
 
 ```
-set playerdata_ignoredIdentifiers []
+set d4_playerdata_ignoredIdentifiers []
 ```
 
 A set of [identifier types] to completely ignore when identifying players.

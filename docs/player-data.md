@@ -79,4 +79,4 @@ well. The Persist ID is an integer value assigned to players, intended for
 effective banning.
 
 This functionality is optional, and can be disabled with the
-`playerdata_usePersistIds` convar.
+`d4_playerdata_usePersistIds` convar.

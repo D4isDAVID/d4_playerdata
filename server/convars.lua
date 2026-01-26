@@ -48,31 +48,31 @@ end
 Convars = {
     ---@return boolean
     usePersistIds = createConvarHandler(
-        'playerdata_usePersistIds',
+        'd4_playerdata_usePersistIds',
         true,
         GetConvarBool
     ),
     ---@return boolean
     allowDuplicateUsers = createConvarHandler(
-        'playerdata_allowDuplicateUsers',
+        'd4_playerdata_allowDuplicateUsers',
         false,
         GetConvarBool
     ),
     ---@return boolean
     migrateMultipleUsers = createConvarHandler(
-        'playerdata_migrateMultipleUsers',
+        'd4_playerdata_migrateMultipleUsers',
         false,
         GetConvarBool
     ),
     ---@return table<string, true>
     requiredIdentifiers = createConvarHandler(
-        'playerdata_requiredIdentifiers',
+        'd4_playerdata_requiredIdentifiers',
         {},
         getConvarTable
     ),
     ---@return table<string, true>
     ignoredIdentifiers = createConvarHandler(
-        'playerdata_ignoredIdentifiers',
+        'd4_playerdata_ignoredIdentifiers',
         {},
         function(name, default)
             local value = getConvarSet(name, default)
