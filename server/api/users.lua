@@ -132,6 +132,42 @@ function API.users.migrate(oldUserId, newUserId)
     return true
 end
 
+---@param userId integer
+---@param principal string
+---@return boolean success
+function API.users.addPrincipal(userId, principal)
+    if Storage.userToPrincipal.exists(userId, principal) then
+        return false
+    end
+
+    Storage.userToPrincipal.set(userId, principal)
+    FlushResourceKvp()
+
+    if API.users.isConnected(userId) then
+        Utils.addUserPrincipal(userId, principal)
+    end
+
+    return true
+end
+
+---@param userId integer
+---@param principal string
+---@return boolean success
+function API.users.removePrincipal(userId, principal)
+    if not Storage.userToPrincipal.exists(userId, principal) then
+        return false
+    end
+
+    Storage.userToPrincipal.delete(userId, principal)
+    FlushResourceKvp()
+
+    if API.users.isConnected(userId) then
+        Utils.removeUserPrincipal(userId, principal)
+    end
+
+    return true
+end
+
 ---@param player unknown
 ---@return integer? userId
 function API.users.ensure(player)
@@ -183,10 +219,15 @@ function API.users.ensure(player)
         end
     end
 
+    local principals = Storage.userToPrincipal.getAll(userId)
+    for i = 1, #principals do
+        Utils.addUserPrincipal(userId, principals[i])
+    end
     Utils.addPlayerPrincipal(player, Utils.getUserAceName(userId))
-    print(('Player %s was assigned User ID %s'):format(player, userId))
 
+    print(('Player %s was assigned User ID %s'):format(player, userId))
     FlushResourceKvp()
+
     if created then
         TriggerEvent('d4_playerdata:userCreated', userId)
     end
@@ -211,6 +252,11 @@ function API.users.remove(player)
     end
 
     Utils.removePlayerPrincipal(player, Utils.getUserAceName(userId))
+    local principals = Storage.userToPrincipal.getAll(userId)
+    for i = 1, #principals do
+        Utils.removeUserPrincipal(userId, principals[i])
+    end
+
     print(('Player %s was unassigned User ID %s'):format(player, userId))
     TriggerEvent('d4_playerdata:userLeft', player, userId)
 end
@@ -222,3 +268,5 @@ exports('isUserIdConnected', API.users.isConnected)
 exports('getPlayersFromUserId', API.users.getPlayers)
 exports('deleteUserId', API.users.delete)
 exports('migrateUserId', API.users.migrate)
+exports('addUserIdPrincipal', API.users.addPrincipal)
+exports('removeUserIdPrincipal', API.users.removePrincipal)

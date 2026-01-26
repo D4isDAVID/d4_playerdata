@@ -129,6 +129,44 @@ Data ID.
 
 - `boolean` - Whether the migration was successful.
 
+### Add User ID Principal
+
+```
+exports.d4_playerdata:addUserIdPrincipal(userId, principal)
+```
+
+Persists a given ACE principal to a given User ID and returns whether it was
+successful.
+Returns `false` if the principal already exists for the given User ID.
+
+#### Parameters
+
+- `userId: integer` - The User ID.
+- `principal: string` - The ACE Principal.
+
+#### Returns
+
+- `boolean` - Whether the principal was added.
+
+### Remove User ID Principal
+
+```
+exports.d4_playerdata:removeUserIdPrincipal(userId, principal)
+```
+
+Removes a given ACE principal from a given User ID and returns whether it was
+successful.
+Returns `false` if the principal does not exist for the given User ID.
+
+#### Parameters
+
+- `userId: integer` - The User ID.
+- `principal: string` - The ACE Principal.
+
+#### Returns
+
+- `boolean` - Whether the principal was removed.
+
 ### Get User ID from Identifier
 
 ```

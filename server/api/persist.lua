@@ -111,9 +111,9 @@ local function migrate(oldPersistId, newPersistId)
 end
 
 ---@param player unknown
----@param createMissing boolean
+---@param connecting boolean?
 ---@return integer? persistId
-function API.persist.ensure(player, createMissing)
+function API.persist.ensure(player, connecting)
     player = tostring(player)
 
     local tokens = Utils.getTokens(player)
@@ -128,7 +128,7 @@ function API.persist.ensure(player, createMissing)
 
     local persistId = persistIds[1]
     if persistId == nil then
-        if not createMissing then
+        if connecting then
             return nil
         end
 
@@ -145,13 +145,15 @@ function API.persist.ensure(player, createMissing)
         API.persist.linkUser(persistId, userIds[i])
     end
 
-    playerToPersistId[player] = persistId
-    if persistIdToPlayers[persistId] == nil then
-        persistIdToPlayers[persistId] = {}
-    end
-    persistIdToPlayers[persistId][player] = true
+    if not connecting then
+        playerToPersistId[player] = persistId
+        if persistIdToPlayers[persistId] == nil then
+            persistIdToPlayers[persistId] = {}
+        end
+        persistIdToPlayers[persistId][player] = true
 
-    print(('Player %s was assigned Persist ID %s'):format(player, persistId))
+        print(('Player %s was assigned Persist ID %s'):format(player, persistId))
+    end
     FlushResourceKvp()
 
     return persistId

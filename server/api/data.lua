@@ -46,7 +46,12 @@ function API.data.assign(player, dataId)
     playerToDataId[player] = dataId
     dataIdToPlayer[dataId] = player
 
+    local principals = Storage.dataToPrincipal.getAll(dataId)
+    for i = 1, #principals do
+        Utils.addDataPrincipal(dataId, principals[i])
+    end
     Utils.addPlayerPrincipal(player, Utils.getDataAceName(dataId))
+
     if resource == nil then
         print(('Player %s (User ID %s) was auto-assigned Data ID %s')
             :format(player, userId, dataId))
@@ -72,7 +77,13 @@ function API.data.unassign(player)
 
     playerToDataId[source] = nil
     dataIdToPlayer[dataId] = nil
+
     Utils.removePlayerPrincipal(player, Utils.getDataAceName(dataId))
+    local principals = Storage.dataToPrincipal.getAll(dataId)
+    for i = 1, #principals do
+        Utils.removeDataPrincipal(dataId, principals[i])
+    end
+
     print(('Player %s (User ID %s) was unassigned Data ID %s')
         :format(player, API.users.get(player), dataId))
     TriggerEvent('d4_playerdata:dataUnassigned', player, dataId)
@@ -143,6 +154,42 @@ function API.data.migrate(dataId, newUserId)
     return true
 end
 
+---@param dataId integer
+---@param principal string
+---@return boolean success
+function API.data.addPrincipal(dataId, principal)
+    if Storage.dataToPrincipal.exists(dataId, principal) then
+        return false
+    end
+
+    Storage.dataToPrincipal.set(dataId, principal)
+    FlushResourceKvp()
+
+    if API.data.getPlayer(dataId) ~= nil then
+        Utils.addDataPrincipal(dataId, principal)
+    end
+
+    return true
+end
+
+---@param dataId integer
+---@param principal string
+---@return boolean success
+function API.data.removePrincipal(dataId, principal)
+    if not Storage.dataToPrincipal.exists(dataId, principal) then
+        return false
+    end
+
+    Storage.dataToPrincipal.delete(dataId, principal)
+    FlushResourceKvp()
+
+    if API.data.getPlayer(dataId) ~= nil then
+        Utils.removeUserPrincipal(dataId, principal)
+    end
+
+    return true
+end
+
 ---@param player unknown
 ---@return integer? dataId
 function API.data.autoAssign(player)
@@ -197,3 +244,5 @@ exports('unassignDataId', API.data.unassign)
 exports('createDataId', API.data.create)
 exports('deleteDataId', API.data.delete)
 exports('migrateDataId', API.data.migrate)
+exports('addDataIdPrincipal', API.data.addPrincipal)
+exports('removeDataIdPrincipal', API.data.removePrincipal)
