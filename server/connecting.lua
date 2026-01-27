@@ -13,7 +13,7 @@ AddEventHandler('playerConnecting', function(name, _, deferrals)
 
     if Convars.usePersistIds() then
         deferrals.update('Searching Persist ID...')
-        local persistId = API.persist.ensure(source, false)
+        local persistId = API.persist.ensure(source, true)
         if persistId ~= nil and Storage.persistBan.exists(persistId) then
             print(('Dropping %s (Persist ID %s) because they are banned')
                 :format(name, persistId))
