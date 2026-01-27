@@ -19,4 +19,5 @@ server_scripts {
     'server/autoAssign.lua',
     'server/connecting.lua',
     'server/players.lua',
+    'server/commands.lua',
 }

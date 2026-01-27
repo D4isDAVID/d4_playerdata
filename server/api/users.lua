@@ -49,15 +49,11 @@ end
 ---@param userId integer
 ---@return unknown[] player
 function API.users.getPlayers(userId)
-    local players = {}
-
-    if userIdToPlayers[userId] ~= nil then
-        for player in pairs(userIdToPlayers[userId]) do
-            players[#players + 1] = player
-        end
+    if userIdToPlayers[userId] == nil then
+        return {}
     end
 
-    return players
+    return Utils.keys(userIdToPlayers[userId])
 end
 
 ---@param userId integer
