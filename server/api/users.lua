@@ -5,6 +5,30 @@ local playerToUserId = {}
 ---@type table<integer, table<string, true>>
 local userIdToPlayers = {}
 
+---@param player string
+---@param userId integer
+local function addCache(player, userId)
+    playerToUserId[player] = userId
+    if userIdToPlayers[userId] == nil then
+        userIdToPlayers[userId] = {}
+    end
+    userIdToPlayers[userId][player] = true
+end
+
+---@param player string
+local function removeCache(player)
+    local userId = playerToUserId[player]
+    if userId == nil then
+        return
+    end
+
+    playerToUserId[player] = nil
+    userIdToPlayers[userId][player] = nil
+    if next(userIdToPlayers[userId]) == nil then
+        userIdToPlayers[userId] = nil
+    end
+end
+
 ---@param player unknown
 ---@return integer? userId
 function API.users.get(player)
@@ -165,8 +189,31 @@ function API.users.removePrincipal(userId, principal)
 end
 
 ---@param player unknown
+---@return boolean allowConnection
+function API.users.connect(player)
+    player = tostring(player)
+
+    local identifiers = Utils.getIdentifiers(player)
+    local userId = API.users.get(player)
+
+    if userId == nil then
+        userId = API.users.resolve(identifiers)[1]
+    end
+
+    if userId ~= nil
+    and API.users.isConnected(userId)
+    and not Convars.allowDuplicateUsers() then
+        return false
+    end
+
+    addCache(player, userId)
+    return true
+end
+
+---@param player unknown
+---@param oldPlayer unknown?
 ---@return integer? userId
-function API.users.ensure(player)
+function API.users.ensure(player, oldPlayer)
     player = tostring(player)
 
     local identifiers = Utils.getIdentifiers(player)
@@ -183,6 +230,10 @@ function API.users.ensure(player)
         end
     end
 
+    if oldPlayer ~= nil then
+        removeCache(oldPlayer)
+    end
+
     if userId == nil then
         if #identifiers == 0 then
             return nil
@@ -194,11 +245,7 @@ function API.users.ensure(player)
         return nil
     end
 
-    playerToUserId[player] = userId
-    if userIdToPlayers[userId] == nil then
-        userIdToPlayers[userId] = {}
-    end
-    userIdToPlayers[userId][player] = true
+    addCache(player, userId)
 
     local persistId = API.persist.get(player)
     if persistId ~= nil then
@@ -237,16 +284,10 @@ end
 function API.users.remove(player)
     player = tostring(player)
 
-    local userId = playerToUserId[player]
-    if userId == nil then
-        return
-    end
+    local userId = API.users.get(player)
+    if userId == nil then return end
 
-    playerToUserId[player] = nil
-    userIdToPlayers[userId][player] = nil
-    if next(userIdToPlayers[userId]) == nil then
-        userIdToPlayers[userId] = nil
-    end
+    removeCache(player)
 
     Utils.removePlayerPrincipal(player, Utils.getUserAceName(userId))
     local principals = Storage.userToPrincipal.getAll(userId)

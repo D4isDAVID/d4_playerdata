@@ -52,8 +52,7 @@ AddEventHandler('playerConnecting', function(name, _, deferrals)
         deferrals.update('Searching User ID...')
         Wait(0)
 
-        local userId = API.users.get(source)
-        if userId ~= nil and API.users.isConnected(userId) then
+        if not API.users.connect(source) then
             print(('Dropping %s because their User ID is already connected')
                 :format(name))
             deferrals.done('You are already in the server.')

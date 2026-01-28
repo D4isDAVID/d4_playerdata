@@ -1,5 +1,6 @@
 ---@param player unknown
-local function initPlayer(player)
+---@param oldPlayer unknown?
+local function initPlayer(player, oldPlayer)
     local name = GetPlayerName(player)
 
     if Convars.usePersistIds() then
@@ -11,7 +12,7 @@ local function initPlayer(player)
         end
     end
 
-    local userId = API.users.ensure(player)
+    local userId = API.users.ensure(player, oldPlayer)
     if userId == nil then
         print(('%s did not get a User ID'):format(name))
         DropPlayer(player, 'Failed to assign a User ID.')
@@ -43,8 +44,9 @@ end)
 AddEventHandler('playerDropped', function()
     removePlayer(source)
 end)
-AddEventHandler('playerJoining', function()
-    initPlayer(source)
+---@param oldSource unknown
+AddEventHandler('playerJoining', function(oldSource)
+    initPlayer(source, oldSource)
 end)
 
 CreateThread(function()
