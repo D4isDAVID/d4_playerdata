@@ -1,9 +1,11 @@
 ---@param player unknown
 local function initPlayer(player)
+    local name = GetPlayerName(player)
+
     if Convars.usePersistIds() then
         local persistId = API.persist.ensure(player)
         if persistId == nil then
-            print(('Player %s did not get a Persist ID'):format(player))
+            print(('%s did not get a Persist ID'):format(name))
             DropPlayer(player, 'Failed to assign a Persist ID.')
             return
         end
@@ -11,14 +13,14 @@ local function initPlayer(player)
 
     local userId = API.users.ensure(player)
     if userId == nil then
-        print(('Player %s did not get a User ID'):format(player))
+        print(('%s did not get a User ID'):format(name))
         DropPlayer(player, 'Failed to assign a User ID.')
         return
     end
 
     local dataId = API.data.autoAssign(player)
     if dataId ~= nil and not API.data.assign(player, dataId) then
-        print(('Player %s did not get Data ID %s'):format(player, dataId))
+        print(('%s did not get Data ID %s'):format(name, dataId))
         DropPlayer(player, ('Failed to assign Data ID %s.'):format(dataId))
         return
     end

@@ -221,7 +221,8 @@ function API.users.ensure(player)
     end
     Utils.addPlayerPrincipal(player, Utils.getUserAceName(userId))
 
-    print(('Player %s was assigned User ID %s'):format(player, userId))
+    local name = GetPlayerName(player)
+    print(('%s was assigned User ID %s'):format(name, userId))
     FlushResourceKvp()
 
     if created then
@@ -253,7 +254,8 @@ function API.users.remove(player)
         Utils.removeUserPrincipal(userId, principals[i])
     end
 
-    print(('Player %s was unassigned User ID %s'):format(player, userId))
+    local name = GetPlayerName(player)
+    print(('%s was unassigned User ID %s'):format(name, userId))
     TriggerEvent('d4_playerdata:userLeft', player, userId)
 end
 

@@ -152,7 +152,8 @@ function API.persist.ensure(player, connecting)
         end
         persistIdToPlayers[persistId][player] = true
 
-        print(('Player %s was assigned Persist ID %s'):format(player, persistId))
+        local name = GetPlayerName(player)
+        print(('%s was assigned Persist ID %s'):format(name, persistId))
     end
     FlushResourceKvp()
 
