@@ -13,6 +13,8 @@ AddEventHandler('playerConnecting', function(name, _, deferrals)
 
     if Convars.usePersistIds() then
         deferrals.update('Searching Persist ID...')
+        Wait(0)
+
         local persistId = API.persist.ensure(source, true)
         if persistId ~= nil and Storage.persistBan.exists(persistId) then
             print(('Dropping %s (Persist ID %s) because they are banned')
@@ -23,6 +25,7 @@ AddEventHandler('playerConnecting', function(name, _, deferrals)
     end
 
     deferrals.update('Checking required identifiers...')
+    Wait(0)
 
     local missingIdentifiers = Utils.getMissingIdentifiers(source)
     if #missingIdentifiers > 0 then
@@ -35,6 +38,7 @@ AddEventHandler('playerConnecting', function(name, _, deferrals)
     end
 
     deferrals.update('Checking usable identifiers...')
+    Wait(0)
 
     local identifiers = Utils.getIdentifiers(source)
     if #identifiers == 0 then
@@ -46,6 +50,7 @@ AddEventHandler('playerConnecting', function(name, _, deferrals)
 
     if not Convars.allowDuplicateUsers() then
         deferrals.update('Searching User ID...')
+        Wait(0)
 
         local userId = API.users.get(source)
         if userId ~= nil and API.users.isConnected(userId) then
