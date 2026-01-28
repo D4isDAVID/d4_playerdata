@@ -16,8 +16,8 @@ server_scripts {
     'server/utils/*.lua',
     'server/storage/**.lua',
     'server/api/*.lua',
+    'server/commands/*.lua',
     'server/autoAssign.lua',
     'server/connecting.lua',
     'server/players.lua',
-    'server/commands.lua',
 }
