@@ -31,7 +31,7 @@ local function removePlayer(player)
     API.persist.remove(player)
 end
 
-Utils.onResourceStop(function()
+Utils.onResourceStop(Utils.currentResource, function()
     for i = 0, GetNumPlayerIndices() - 1 do
         local player = GetPlayerFromIndex(i)
         removePlayer(player)
