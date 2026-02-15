@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "rsbuild build",
+    "dev": "rsbuild dev",
+    "preview": "rsbuild preview"
+  },
+  "dependencies": {
+    "@mantine/core": "^8.3.14",
+    "@mantine/hooks": "^8.3.14",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "tailwindcss": "^4.1.18"
+  },
+  "devDependencies": {
+    "@rsbuild/core": "^1.7.3",
+    "@rsbuild/plugin-react": "^1.4.5",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "postcss-preset-mantine": "^1.18.0"
+  }
+}

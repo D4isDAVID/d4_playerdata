@@ -1,6 +1,15 @@
 {
-  "editor.defaultFormatter": "sumneko.lua",
+  "editor.defaultFormatter": "biomejs.biome",
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
-  "files.insertFinalNewline": true
+  "files.insertFinalNewline": true,
+  "biome.enabled": true,
+  "editor.codeActionsOnSave": {
+    "source.biome": "always",
+    "source.fixAll.biome": "always",
+    "source.organizeImports.biome": "always"
+  },
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua"
+  }
 }

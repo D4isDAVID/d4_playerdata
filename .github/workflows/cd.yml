@@ -2,37 +2,81 @@ name: CD
 
 on:
   push:
-    tags:
-      - '**'
+  pull_request:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
-  release:
-    name: Draft Release
+  artifact:
+    name: Upload Artifact
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          path: d4_playerdata
           sparse-checkout: |
+            client
             docs
             server
+            ui
             CHANGELOG.md
             CONTRIBUTING.md
             LICENSE
             README.md
             SECURITY.md
             fxmanifest.lua
+            package.json
+            pnpm-lock.yaml
+            pnpm-workspace.yaml
+            postbuild.js
           sparse-checkout-cone-mode: false
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm build
+
+      - name: Post-build
+        shell: bash
+        run: |
+          rm -rf .git node_modules .yarn.installed package.json pnpm-lock.yaml pnpm-workspace.yaml postbuild.js
+          mkdir -v ui-temp
+          mv -vfT ui/dist ui-temp/dist
+          rm -rf ui
+          mv -vfT ui-temp ui
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v6
+        with:
+          name: d4_playerdata
+          path: .
+
+  release:
+    name: Draft Release
+    runs-on: ubuntu-latest
+    needs: artifact
+    if: ${{ github.event_name == 'push' && github.ref_type == 'tag' }}
+    permissions:
+      contents: write
+    steps:
+      - name: Download archives
+        uses: actions/download-artifact@v7
 
       - name: Archive
         shell: bash
         run: |
-          rm -rf ./d4_playerdata/.git
-          zip -r d4_playerdata.zip ./d4_playerdata/
+          zip -v d4_playerdata.zip ./*
 
       - name: Draft release
         uses: softprops/action-gh-release@v2

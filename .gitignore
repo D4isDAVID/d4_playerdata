@@ -1,3 +1,10 @@
+# Dependencies
+node_modules/
+
+# Output
+dist/
+.yarn.installed
+
 # IDE
 .idea/
 .vscode/*

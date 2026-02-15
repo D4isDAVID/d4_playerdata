@@ -8,9 +8,10 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
-[*.lua]
+[*.{lua,ts,tsx}]
 indent_size = 4
 
+[*.lua]
 # see https://github.com/CppCXY/EmmyLuaCodeStyle
 # [basic]
 quote_style = single

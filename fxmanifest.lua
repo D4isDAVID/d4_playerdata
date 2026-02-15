@@ -6,7 +6,6 @@ description 'Player identifier and data persistence for FXServer.'
 author 'David Malchin <malchin459@gmail.com>'
 repository 'https://github.com/D4isDAVID/d4_playerdata'
 
-server_only 'yes'
 lua54 'yes'
 use_experimental_fxv2_oal 'yes'
 
@@ -21,3 +20,13 @@ server_scripts {
     'server/connecting.lua',
     'server/players.lua',
 }
+
+client_scripts {
+    'client/init.lua',
+}
+
+files {
+    'ui/dist/**',
+}
+
+ui_page 'ui/dist/index.html'
