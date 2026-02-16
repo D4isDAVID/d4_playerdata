@@ -44,6 +44,7 @@ end)
 AddEventHandler('playerDropped', function()
     removePlayer(source)
 end)
+
 ---@param oldSource unknown
 AddEventHandler('playerJoining', function(oldSource)
     initPlayer(source, oldSource)

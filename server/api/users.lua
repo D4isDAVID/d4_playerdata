@@ -1,5 +1,9 @@
 API.users = {}
 
+---@type table<string, string>
+local connectingPlayers = {}
+local connectingThreadRunning = false
+
 ---@type table<string, integer>
 local playerToUserId = {}
 ---@type table<integer, table<string, true>>
@@ -200,6 +204,10 @@ function API.users.connect(player)
         userId = API.users.resolve(identifiers)[1]
     end
 
+    if userId == nil then
+        return true
+    end
+
     if userId ~= nil
     and API.users.isConnected(userId)
     and not Convars.allowDuplicateUsers() then
@@ -207,6 +215,33 @@ function API.users.connect(player)
     end
 
     addCache(player, userId)
+    connectingPlayers[player] = GetPlayerName(player)
+
+    if not connectingThreadRunning then
+        connectingThreadRunning = true
+        CreateThread(function()
+            print('Awaiting connecting players')
+
+            while next(connectingPlayers) do
+                local players = Utils.keys(connectingPlayers)
+
+                for i = 1, #players do
+                    local connectingPlayer = players[i]
+                    if not DoesPlayerExist(connectingPlayer) then
+                        print(('%s disconnected')
+                            :format(connectingPlayers[connectingPlayer]))
+                        connectingPlayers[connectingPlayer] = nil
+                        removeCache(connectingPlayer)
+                    end
+                end
+            end
+
+            connectingThreadRunning = false
+
+            print('Ended awaiting connecting players')
+        end)
+    end
+
     return true
 end
 
@@ -215,6 +250,7 @@ end
 ---@return integer? userId
 function API.users.ensure(player, oldPlayer)
     player = tostring(player)
+    oldPlayer = tostring(oldPlayer)
 
     local identifiers = Utils.getIdentifiers(player)
     local userId = API.users.get(player)
@@ -232,6 +268,7 @@ function API.users.ensure(player, oldPlayer)
 
     if oldPlayer ~= nil then
         removeCache(oldPlayer)
+        connectingPlayers[oldPlayer] = nil
     end
 
     if userId == nil then
