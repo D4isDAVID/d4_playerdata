@@ -9,7 +9,7 @@
 
 ### Get User ID from Player
 
-```
+```lua
 exports.d4_playerdata:getUserId(player)
 ```
 
@@ -25,7 +25,7 @@ Returns the given player's User ID.
 
 ### Does User ID Exist
 
-```
+```lua
 exports.d4_playerdata:doesUserIdExist(userId)
 ```
 
@@ -41,7 +41,7 @@ Returns whether a given User ID exists.
 
 ### Resolve User IDs from Identifiers
 
-```
+```lua
 exports.d4_playerdata:resolveUserIds(identifiers)
 ```
 
@@ -57,7 +57,7 @@ Resolves and returns User IDs based on the given identifiers.
 
 ### Is User ID Connected
 
-```
+```lua
 exports.d4_playerdata:isUserIdConnected(userId)
 ```
 
@@ -73,7 +73,7 @@ Returns whether the given User ID is connected to the server.
 
 ### Get Players from User ID
 
-```
+```lua
 exports.d4_playerdata:getPlayersFromUserId(userId)
 ```
 
@@ -90,7 +90,7 @@ The returned table will be empty when offline.
 
 ### Delete User ID
 
-```
+```lua
 exports.d4_playerdata:deleteUserId(userId)
 ```
 
@@ -108,7 +108,7 @@ ID is currently connected, or it failed to delete a Data ID.
 
 ### Migrate User ID
 
-```
+```lua
 exports.d4_playerdata:migrateUserId(oldUserId, newUserId)
 ```
 
@@ -131,7 +131,7 @@ Data ID.
 
 ### Add User ID Principal
 
-```
+```lua
 exports.d4_playerdata:addUserIdPrincipal(userId, principal)
 ```
 
@@ -150,7 +150,7 @@ Returns `false` if the principal already exists for the given User ID.
 
 ### Remove User ID Principal
 
-```
+```lua
 exports.d4_playerdata:removeUserIdPrincipal(userId, principal)
 ```
 
@@ -169,7 +169,7 @@ Returns `false` if the principal does not exist for the given User ID.
 
 ### Get User ID from Identifier
 
-```
+```lua
 exports.d4_playerdata:getUserIdFromIdentifier(identifier)
 ```
 
@@ -185,7 +185,7 @@ Returns the User ID linked to the given identifier.
 
 ### Get Identifier from User ID
 
-```
+```lua
 exports.d4_playerdata:getIdentifierFromUserId(userId, identifierType)
 ```
 
@@ -202,7 +202,7 @@ Returns the identifier of the given type linked to the given User ID.
 
 ### Get Identifiers from User ID
 
-```
+```lua
 exports.d4_playerdata:getIdentifiersFromUserId(userId)
 ```
 
@@ -220,7 +220,7 @@ Returns the identifiers linked to the given User ID.
 
 ### User Created
 
-```
+```lua
 AddEventHandler('d4_playerdata:userCreated', function(userId) end)
 ```
 
@@ -232,7 +232,7 @@ Triggered after a User ID is created.
 
 ### User Deleted
 
-```
+```lua
 AddEventHandler('d4_playerdata:userDeleted', function(userId) end)
 ```
 
@@ -244,7 +244,7 @@ Triggered after a User ID is deleted.
 
 ### User Migrated
 
-```
+```lua
 AddEventHandler('d4_playerdata:userMigrated', function(oldUserId, newUserId) end)
 ```
 
@@ -258,7 +258,7 @@ The old User ID will be deleted after this event is triggered.
 
 ### User Joined
 
-```
+```lua
 AddEventHandler('d4_playerdata:userJoined', function(source, userId) end)
 ```
 
@@ -271,7 +271,7 @@ Triggered after a player is assigned a User ID.
 
 ### User Left
 
-```
+```lua
 AddEventHandler('d4_playerdata:userLeft', function(source, userId) end)
 ```
 

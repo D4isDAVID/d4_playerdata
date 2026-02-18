@@ -8,7 +8,7 @@
 
 ### Get Persist ID from Player
 
-```
+```lua
 exports.d4_playerdata:getPersistId(player)
 ```
 
@@ -24,7 +24,7 @@ Returns the given player's Persist ID.
 
 ### Does Persist ID Exist
 
-```
+```lua
 exports.d4_playerdata:doesPersistIdExist(persistId)
 ```
 
@@ -40,7 +40,7 @@ Returns whether a given Persist ID exists.
 
 ### Resolve Persist IDs from Tokens and Identifiers
 
-```
+```lua
 exports.d4_playerdata:resolvePersistIds(tokens, identifiers)
 ```
 
@@ -57,7 +57,7 @@ Resolves and returns Persist IDs based on the given tokens and identifiers.
 
 ### Get Presist ID from Token
 
-```
+```lua
 exports.d4_playerdata:getPersistIdFromToken(token)
 ```
 
@@ -73,7 +73,7 @@ Returns the Persist ID linked to the given token.
 
 ### Get Tokens from Persist ID
 
-```
+```lua
 exports.d4_playerdata:getTokensFromPersistId(persistId)
 ```
 
@@ -89,7 +89,7 @@ Returns the tokens linked to the given Persist ID.
 
 ### Get Presist ID from Identifier
 
-```
+```lua
 exports.d4_playerdata:getPersistIdFromIdentifier(identifier)
 ```
 
@@ -105,7 +105,7 @@ Returns the Persist ID linked to the given identifier.
 
 ### Get Identifiers from Persist ID
 
-```
+```lua
 exports.d4_playerdata:getIdentifiersFromPersistId(userId)
 ```
 
@@ -121,7 +121,7 @@ Returns the identifiers linked to the given Persist ID.
 
 ### Get Presist ID from User ID
 
-```
+```lua
 exports.d4_playerdata:getPersistIdFromUserId(userId)
 ```
 
@@ -137,7 +137,7 @@ Returns the Persist ID linked to the given User ID.
 
 ### Get User IDs from Persist ID
 
-```
+```lua
 exports.d4_playerdata:getUserIdsFromPersistId(persistId)
 ```
 
@@ -153,7 +153,7 @@ Returns the User IDs linked to the given Persist ID.
 
 ### Is Persist ID Banned
 
-```
+```lua
 exports.d4_playerdata:isPersistIdBanned(persistId)
 ```
 
@@ -169,7 +169,7 @@ Returns whether a given Persist ID is banned from the server.
 
 ### Ban Persist ID
 
-```
+```lua
 exports.d4_playerdata:banPersistId(persistId)
 ```
 
@@ -186,7 +186,7 @@ Returns false if the Persist ID doesn't exist, or it's already banned.
 
 ### Unban Persist ID
 
-```
+```lua
 exports.d4_playerdata:unbanPersistId(persistId)
 ```
 

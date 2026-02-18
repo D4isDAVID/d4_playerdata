@@ -10,7 +10,7 @@
 
 ### Disable Data Auto Assignment
 
-```
+```lua
 d4_playerdata_disableDataAutoAssign 'yes'
 ```
 
@@ -22,7 +22,7 @@ in resources such as character selection screens.
 
 ### Get Data ID Assigned to Player
 
-```
+```lua
 exports.d4_playerdata:getDataId(player)
 ```
 
@@ -38,7 +38,7 @@ Returns the Data ID assigned to the given player, or `nil` if not assigned.
 
 ### Does Data ID Exist
 
-```
+```lua
 exports.d4_playerdata:doesDataIdExist(dataId)
 ```
 
@@ -54,7 +54,7 @@ Returns whether a given Data ID exists.
 
 ### Get Player Assigned to Data ID
 
-```
+```lua
 exports.d4_playerdata:getPlayerFromDataId(dataId)
 ```
 
@@ -70,7 +70,7 @@ Returns the player assigned to the given Data ID, or `nil` if not assigned.
 
 ### Assign Data ID to Player
 
-```
+```lua
 exports.d4_playerdata:assignDataId(player, dataId)
 ```
 
@@ -92,7 +92,7 @@ successful. Returns false if:
 
 ### Unassign Data ID from Player
 
-```
+```lua
 exports.d4_playerdata:unassignDataId(player)
 ```
 
@@ -109,7 +109,7 @@ Returns false if the given player has no assigned Data ID.
 
 ### Create Data ID for User ID
 
-```
+```lua
 exports.d4_playerdata:createDataId(userId)
 ```
 
@@ -126,7 +126,7 @@ the given User ID doesn't exist.
 
 ### Delete Data ID
 
-```
+```lua
 exports.d4_playerdata:deleteDataId(dataId)
 ```
 
@@ -144,7 +144,7 @@ is currently connected.
 
 ### Migrate Data ID
 
-```
+```lua
 exports.d4_playerdata:migrateDataId(dataId, newUserId)
 ```
 
@@ -163,7 +163,7 @@ User ID, or a player with the given Data ID is currently connected.
 
 ### Add Data ID Principal
 
-```
+```lua
 exports.d4_playerdata:addDataIdPrincipal(dataId, principal)
 ```
 
@@ -182,7 +182,7 @@ Returns `false` if the principal already exists for the given Data ID.
 
 ### Remove Data ID Principal
 
-```
+```lua
 exports.d4_playerdata:removeDataIdPrincipal(dataId, principal)
 ```
 
@@ -201,7 +201,7 @@ Returns `false` if the principal does not exist for the given Data ID.
 
 ### Get User ID from Data ID
 
-```
+```lua
 exports.d4_playerdata:getUserIdFromDataId(dataId)
 ```
 
@@ -217,7 +217,7 @@ Returns the User ID linked to the given Data ID.
 
 ### Get Data IDs from User ID
 
-```
+```lua
 exports.d4_playerdata:getDataIdsFromUserId(userId)
 ```
 
@@ -233,7 +233,7 @@ Returns the Data IDs linked to the given User ID.
 
 ### Does Data ID Exist for User ID
 
-```
+```lua
 exports.d4_playerdata:doesDataIdExist(userId, dataId)
 ```
 
@@ -252,7 +252,7 @@ Returns whether the given Data IDs is linked to the given User ID.
 
 ### Data Created
 
-```
+```lua
 AddEventHandler('d4_playerdata:dataCreated', function(dataId, userId) end)
 ```
 
@@ -265,7 +265,7 @@ Triggered after a Data ID is created.
 
 ### Data Deleted
 
-```
+```lua
 AddEventHandler('d4_playerdata:dataDeleted', function(dataId, userId) end)
 ```
 
@@ -278,7 +278,7 @@ Triggered after a Data ID is deleted.
 
 ### Data Migrated
 
-```
+```lua
 AddEventHandler('d4_playerdata:dataMigrated', function(dataId, oldUserId, newOldId) end)
 ```
 
@@ -292,7 +292,7 @@ Triggered after a Data ID is migrated to another User ID.
 
 ### Data Assigned
 
-```
+```lua
 AddEventHandler('d4_playerdata:dataAssigned', function(source, dataId) end)
 ```
 
@@ -305,7 +305,7 @@ Triggered after a player is assigned a Data ID.
 
 ### Data Unassigned
 
-```
+```lua
 AddEventHandler('d4_playerdata:dataUnassigned', function(source, dataId) end)
 ```
 
