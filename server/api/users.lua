@@ -219,17 +219,14 @@ function API.users.connect(player)
 
     if not connectingThreadRunning then
         connectingThreadRunning = true
+
         CreateThread(function()
             print('Awaiting connecting players')
 
             while next(connectingPlayers) do
-                local players = Utils.keys(connectingPlayers)
-
-                for i = 1, #players do
-                    local connectingPlayer = players[i]
+                for connectingPlayer, name in pairs(connectingPlayers) do
                     if not DoesPlayerExist(connectingPlayer) then
-                        print(('%s disconnected')
-                            :format(connectingPlayers[connectingPlayer]))
+                        print(('%s disconnected'):format(name))
                         connectingPlayers[connectingPlayer] = nil
                         removeCache(connectingPlayer)
                     end
