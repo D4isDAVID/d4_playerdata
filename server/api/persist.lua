@@ -103,6 +103,8 @@ local function migrate(oldPersistId, newPersistId)
         API.persist.linkUser(newPersistId, userId)
         Storage.persistToUser.delete(oldPersistId, userId)
     end
+
+    TriggerEvent('d4_playerdata:persistMigrated', oldPersistId, newPersistId)
 end
 
 ---@param player unknown

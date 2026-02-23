@@ -3,6 +3,7 @@
 ## Table of Contents
 
 - [Server Exports](#server-exports)
+- [Server Events](#server-events)
 
 ## Server Exports
 
@@ -150,3 +151,19 @@ Returns the User IDs linked to the given Persist ID.
 #### Returns
 
 - `integer[]` - The User IDs linked to the given Persist ID.
+
+## Server Events
+
+### Persist Migrated
+
+```lua
+AddEventHandler('d4_playerdata:persistMigrated', function(oldPersistId, newPersistId) end)
+```
+
+Triggered after a Persist ID is migrated to another.
+
+#### Parameters
+
+- `oldUserId: integer` - The old Persist ID data was migrated from.
+- `newUserId: integer` - The new Persist ID data was migrated to.
+
