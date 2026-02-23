@@ -335,10 +335,13 @@ function API.users.remove(player)
 end
 
 exports('getUserId', API.users.get)
+exports('getUserIdFromIdentifier', Storage.identifierToUser.get)
 exports('doesUserIdExist', API.users.exists)
 exports('resolveUserIds', API.users.resolve)
 exports('isUserIdConnected', API.users.isConnected)
 exports('getPlayersFromUserId', API.users.getPlayers)
+exports('getIdentifierFromUserId', Storage.userToIdentifier.get)
+exports('getIdentifiersFromUserId', Storage.userToIdentifier.getAll)
 exports('deleteUserId', API.users.delete)
 exports('migrateUserId', API.users.migrate)
 exports('addUserIdPrincipal', API.users.addPrincipal)

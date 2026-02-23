@@ -22,6 +22,54 @@ Returns the given player's Persist ID.
 
 - `integer?` - The player's Persist ID.
 
+### Get Presist ID from Token
+
+```lua
+exports.d4_playerdata:getPersistIdFromToken(token)
+```
+
+Returns the Persist ID linked to the given token.
+
+#### Parameters
+
+- `token: string` - The token.
+
+#### Returns
+
+- `integer?` - The Persist ID linked to the given token.
+
+### Get Presist ID from Identifier
+
+```lua
+exports.d4_playerdata:getPersistIdFromIdentifier(identifier)
+```
+
+Returns the Persist ID linked to the given identifier.
+
+#### Parameters
+
+- `identifier: string` - The identifier.
+
+#### Returns
+
+- `integer?` - The Persist ID linked to the given identifier.
+
+### Get Presist ID from User ID
+
+```lua
+exports.d4_playerdata:getPersistIdFromUserId(userId)
+```
+
+Returns the Persist ID linked to the given User ID.
+
+#### Parameters
+
+- `userId: string` - The User ID.
+
+#### Returns
+
+- `integer?` - The Persist ID linked to the given User ID.
+
 ### Does Persist ID Exist
 
 ```lua
@@ -55,22 +103,6 @@ Resolves and returns Persist IDs based on the given tokens and identifiers.
 
 - `integer[]` - The resolved Persist IDs.
 
-### Get Presist ID from Token
-
-```lua
-exports.d4_playerdata:getPersistIdFromToken(token)
-```
-
-Returns the Persist ID linked to the given token.
-
-#### Parameters
-
-- `token: string` - The token.
-
-#### Returns
-
-- `integer?` - The Persist ID linked to the given token.
-
 ### Get Tokens from Persist ID
 
 ```lua
@@ -87,22 +119,6 @@ Returns the tokens linked to the given Persist ID.
 
 - `string[]` - The tokens linked to the given Persist ID.
 
-### Get Presist ID from Identifier
-
-```lua
-exports.d4_playerdata:getPersistIdFromIdentifier(identifier)
-```
-
-Returns the Persist ID linked to the given identifier.
-
-#### Parameters
-
-- `identifier: string` - The identifier.
-
-#### Returns
-
-- `integer?` - The Persist ID linked to the given identifier.
-
 ### Get Identifiers from Persist ID
 
 ```lua
@@ -118,22 +134,6 @@ Returns the identifiers linked to the given Persist ID.
 #### Returns
 
 - `string[]` - The identifiers linked to the given Persist ID.
-
-### Get Presist ID from User ID
-
-```lua
-exports.d4_playerdata:getPersistIdFromUserId(userId)
-```
-
-Returns the Persist ID linked to the given User ID.
-
-#### Parameters
-
-- `userId: string` - The User ID.
-
-#### Returns
-
-- `integer?` - The Persist ID linked to the given User ID.
 
 ### Get User IDs from Persist ID
 

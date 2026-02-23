@@ -172,5 +172,11 @@ function API.persist.remove(player)
 end
 
 exports('getPersistId', API.persist.get)
+exports('getPersistIdFromToken', Storage.tokenToPersist.get)
+exports('getPersistIdFromIdentifier', Storage.identifierToPersist.get)
+exports('getPersistIdFromUserId', Storage.userToPersist.get)
 exports('doesPersistIdExist', API.persist.exists)
 exports('resolvePersistIds', API.persist.resolve)
+exports('getTokensFromPersistId', Storage.persistToToken.getAll)
+exports('getIdentifiersFromPersistId', Storage.persistToIdentifier.getAll)
+exports('getUserIdsFromPersistId', Storage.persistToUser.getAll)

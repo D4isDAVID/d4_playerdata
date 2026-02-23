@@ -53,6 +53,3 @@ end
 function Storage.userToIdentifier.delete(userId, identifierType)
     DeleteResourceKvpNoSync(key(userId, identifierType))
 end
-
-exports('getIdentifierFromUserId', Storage.userToIdentifier.get)
-exports('getIdentifiersFromUserId', Storage.userToIdentifier.getAll)

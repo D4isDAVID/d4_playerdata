@@ -32,5 +32,3 @@ end
 function Storage.persistToUser.delete(persistId, userId)
     DeleteResourceKvpNoSync(key(persistId, userId))
 end
-
-exports('getUserIdsFromPersistId', Storage.persistToUser.getAll)

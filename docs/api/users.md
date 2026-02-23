@@ -23,6 +23,22 @@ Returns the given player's User ID.
 
 - `integer?` - The player's User ID.
 
+### Get User ID from Identifier
+
+```lua
+exports.d4_playerdata:getUserIdFromIdentifier(identifier)
+```
+
+Returns the User ID linked to the given identifier.
+
+#### Parameters
+
+- `identifier: string` - The identifier.
+
+#### Returns
+
+- `integer?` - The User ID linked to the given identifier.
+
 ### Does User ID Exist
 
 ```lua
@@ -87,6 +103,39 @@ The returned table will be empty when offline.
 #### Returns
 
 - `string[]` - The player Net IDs linked to the given User ID.
+
+### Get Identifier from User ID
+
+```lua
+exports.d4_playerdata:getIdentifierFromUserId(userId, identifierType)
+```
+
+Returns the identifier of the given type linked to the given User ID.
+
+#### Parameters
+
+- `userId: integer` - The User ID.
+- `identifierType: integer` - The identifier type.
+
+#### Returns
+
+- `string?` - The identifier of the given type linked to the given User ID.
+
+### Get Identifiers from User ID
+
+```lua
+exports.d4_playerdata:getIdentifiersFromUserId(userId)
+```
+
+Returns the identifiers linked to the given User ID.
+
+#### Parameters
+
+- `userId: integer` - The User ID.
+
+#### Returns
+
+- `string[]` - The identifiers linked to the given User ID.
 
 ### Delete User ID
 
@@ -167,55 +216,6 @@ Returns `false` if the principal does not exist for the given User ID.
 
 - `boolean` - Whether the principal was removed.
 
-### Get User ID from Identifier
-
-```lua
-exports.d4_playerdata:getUserIdFromIdentifier(identifier)
-```
-
-Returns the User ID linked to the given identifier.
-
-#### Parameters
-
-- `identifier: string` - The identifier.
-
-#### Returns
-
-- `integer?` - The User ID linked to the given identifier.
-
-### Get Identifier from User ID
-
-```lua
-exports.d4_playerdata:getIdentifierFromUserId(userId, identifierType)
-```
-
-Returns the identifier of the given type linked to the given User ID.
-
-#### Parameters
-
-- `userId: integer` - The User ID.
-- `identifierType: integer` - The identifier type.
-
-#### Returns
-
-- `string?` - The identifier of the given type linked to the given User ID.
-
-### Get Identifiers from User ID
-
-```lua
-exports.d4_playerdata:getIdentifiersFromUserId(userId)
-```
-
-Returns the identifiers linked to the given User ID.
-
-#### Parameters
-
-- `userId: integer` - The User ID.
-
-#### Returns
-
-- `string[]` - The identifiers linked to the given User ID.
-
 ## Server Events
 
 ### User Created
@@ -259,25 +259,25 @@ The old User ID will be deleted after this event is triggered.
 ### User Joined
 
 ```lua
-AddEventHandler('d4_playerdata:userJoined', function(source, userId) end)
+AddEventHandler('d4_playerdata:userJoined', function(player, userId) end)
 ```
 
 Triggered after a player is assigned a User ID.
 
 #### Parameters
 
-- `source: string` - The player Net ID.
+- `player: string` - The player Net ID.
 - `userId: integer` - The assigned User ID.
 
 ### User Left
 
 ```lua
-AddEventHandler('d4_playerdata:userLeft', function(source, userId) end)
+AddEventHandler('d4_playerdata:userLeft', function(player, userId) end)
 ```
 
 Triggered after a player is unassigned a User ID.
 
 #### Parameters
 
-- `source: string` - The player Net ID.
+- `player: string` - The player Net ID.
 - `userId: integer` - The unassigned User ID.

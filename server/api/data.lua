@@ -239,8 +239,11 @@ function API.data.toggleAutoAssign(enabled, resource)
 end
 
 exports('getDataId', API.data.get)
+exports('getDataIdsFromUserId', Storage.userToData.getAll)
 exports('doesDataIdExist', API.data.exists)
+exports('doesDataIdExistForUserId', Storage.userToData.exists)
 exports('getPlayerFromDataId', API.data.getPlayer)
+exports('getUserIdFromDataId', Storage.dataToUser.get)
 exports('assignDataId', API.data.assign)
 exports('unassignDataId', API.data.unassign)
 exports('createDataId', API.data.create)

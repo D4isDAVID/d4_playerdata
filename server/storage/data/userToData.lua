@@ -39,6 +39,3 @@ end
 function Storage.userToData.delete(userId, dataId)
     DeleteResourceKvpNoSync(key(userId, dataId))
 end
-
-exports('doesDataIdExistForUserId', Storage.userToData.exists)
-exports('getDataIdsFromUserId', Storage.userToData.getAll)

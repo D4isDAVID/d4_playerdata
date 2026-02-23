@@ -36,6 +36,22 @@ Returns the Data ID assigned to the given player, or `nil` if not assigned.
 
 - `integer?` - The assigned Data ID, or `nil` of not assigned.
 
+### Get Data IDs from User ID
+
+```lua
+exports.d4_playerdata:getDataIdsFromUserId(userId)
+```
+
+Returns the Data IDs linked to the given User ID.
+
+#### Parameters
+
+- `userId: integer` - The User ID.
+
+#### Returns
+
+- `integer[]` - The Data IDs linked to the given User ID.
+
 ### Does Data ID Exist
 
 ```lua
@@ -52,6 +68,23 @@ Returns whether a given Data ID exists.
 
 - `boolean` - Whether the given Data ID exists.
 
+### Does Data ID Exist for User ID
+
+```lua
+exports.d4_playerdata:doesDataIdExistForUser(userId, dataId)
+```
+
+Returns whether the given Data ID is linked to the given User ID.
+
+#### Parameters
+
+- `userId: integer` - The User ID.
+- `dataId: integer` - The Data ID.
+
+#### Returns
+
+- `boolean` - Whether the given Data ID is linked to the given User ID.
+
 ### Get Player Assigned to Data ID
 
 ```lua
@@ -67,6 +100,22 @@ Returns the player assigned to the given Data ID, or `nil` if not assigned.
 #### Returns
 
 - `string?` - The assigned player Net ID, or `nil` of not assigned.
+
+### Get User ID from Data ID
+
+```lua
+exports.d4_playerdata:getUserIdFromDataId(dataId)
+```
+
+Returns the User ID linked to the given Data ID.
+
+#### Parameters
+
+- `dataId: integer` - The Data ID.
+
+#### Returns
+
+- `integer?` - The User ID linked to the given Data ID.
 
 ### Assign Data ID to Player
 
@@ -199,55 +248,6 @@ Returns `false` if the principal does not exist for the given Data ID.
 
 - `boolean` - Whether the principal was removed.
 
-### Get User ID from Data ID
-
-```lua
-exports.d4_playerdata:getUserIdFromDataId(dataId)
-```
-
-Returns the User ID linked to the given Data ID.
-
-#### Parameters
-
-- `dataId: integer` - The Data ID.
-
-#### Returns
-
-- `integer?` - The User ID linked to the given Data ID.
-
-### Get Data IDs from User ID
-
-```lua
-exports.d4_playerdata:getDataIdsFromUserId(userId)
-```
-
-Returns the Data IDs linked to the given User ID.
-
-#### Parameters
-
-- `userId: integer` - The User ID.
-
-#### Returns
-
-- `integer[]` - The Data IDs linked to the given User ID.
-
-### Does Data ID Exist for User ID
-
-```lua
-exports.d4_playerdata:doesDataIdExist(userId, dataId)
-```
-
-Returns whether the given Data IDs is linked to the given User ID.
-
-#### Parameters
-
-- `userId: integer` - The User ID.
-- `dataId: integer` - The Data ID.
-
-#### Returns
-
-- `boolean` - Whether the given Data ID is linked to the given User ID.
-
 ## Server Events
 
 ### Data Created
@@ -293,25 +293,25 @@ Triggered after a Data ID is migrated to another User ID.
 ### Data Assigned
 
 ```lua
-AddEventHandler('d4_playerdata:dataAssigned', function(source, dataId) end)
+AddEventHandler('d4_playerdata:dataAssigned', function(player, dataId) end)
 ```
 
 Triggered after a player is assigned a Data ID.
 
 #### Parameters
 
-- `source: string` - The player Net ID.
+- `player: string` - The player Net ID.
 - `dataId: integer` - The assigned Data ID.
 
 ### Data Unassigned
 
 ```lua
-AddEventHandler('d4_playerdata:dataUnassigned', function(source, dataId) end)
+AddEventHandler('d4_playerdata:dataUnassigned', function(player, dataId) end)
 ```
 
 Triggered after a player is unassigned a Data ID.
 
 #### Parameters
 
-- `source: string` - The player Net ID.
+- `player: string` - The player Net ID.
 - `dataId: integer` - The unassigned Data ID.

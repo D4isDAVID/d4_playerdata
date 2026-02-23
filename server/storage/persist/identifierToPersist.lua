@@ -30,5 +30,3 @@ end
 function Storage.identifierToPersist.delete(identifier)
     DeleteResourceKvpNoSync(key(identifier))
 end
-
-exports('getPersistIdFromIdentifier', Storage.identifierToPersist.get)
