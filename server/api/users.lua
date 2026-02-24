@@ -87,11 +87,7 @@ end
 ---@param userId integer
 ---@return boolean success
 function API.users.delete(userId)
-    if not API.users.exists(userId) then
-        return false
-    end
-
-    if API.users.isConnected(userId) then
+    if not API.users.exists(userId) and API.users.isConnected(userId) then
         return false
     end
 

@@ -22,7 +22,7 @@ function API.data.exists(dataId)
 end
 
 ---@param dataId integer
----@return unknown? player
+---@return string? player
 function API.data.getPlayer(dataId)
     return dataIdToPlayer[dataId]
 end

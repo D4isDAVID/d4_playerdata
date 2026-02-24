@@ -74,6 +74,18 @@ end
 
 ---@param name string
 ---@param param string
+---@return integer dataId
+function Utils.parseDataIdParam(name, param)
+    local dataId = Utils.parseIntegerParam(name, param)
+    if not API.data.exists(dataId) then
+        error(("Invalid Data ID for parameter '%s'"):format(name))
+    end
+
+    return dataId
+end
+
+---@param name string
+---@param param string
 ---@return integer persistId
 function Utils.parsePersistIdParam(name, param)
     local persistId = Utils.parseIntegerParam(name, param)
