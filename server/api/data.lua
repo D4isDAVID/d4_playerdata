@@ -160,7 +160,8 @@ end
 ---@param principal string
 ---@return boolean success
 function API.data.addPrincipal(dataId, principal)
-    if Storage.dataToPrincipal.exists(dataId, principal) then
+    if not API.data.exists(dataId)
+    or Storage.dataToPrincipal.exists(dataId, principal) then
         return false
     end
 
@@ -178,7 +179,8 @@ end
 ---@param principal string
 ---@return boolean success
 function API.data.removePrincipal(dataId, principal)
-    if not Storage.dataToPrincipal.exists(dataId, principal) then
+    if not API.data.exists(dataId)
+    or not Storage.dataToPrincipal.exists(dataId, principal) then
         return false
     end
 

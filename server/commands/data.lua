@@ -20,7 +20,7 @@ Utils.registerCommand({
 end)
 
 Utils.registerCommand({
-    name = 'data:getFromUserId',
+    name = 'data:fromUser',
     help = 'Get the Data IDs linked to a User ID.',
     params = {
         {
@@ -63,7 +63,7 @@ Utils.registerCommand({
 end)
 
 Utils.registerCommand({
-    name = 'data:getUserId',
+    name = 'data:getUser',
     help = 'Get the linked User ID from a Data ID.',
     params = {
         {
@@ -258,7 +258,8 @@ Utils.registerCommand({
 
     local success = API.data.addPrincipal(dataId, principal)
     if not success then
-        error(('No such Data ID %d'):format(dataId))
+        error(('ACE principal %s already exists for Data ID %d.')
+            :format(principal, dataId))
     end
 
     print(('Added ACE principal %s to Data ID %s'):format(principal, dataId))
@@ -284,7 +285,8 @@ Utils.registerCommand({
 
     local success = API.data.removePrincipal(dataId, principal)
     if not success then
-        error(('No such Data ID %d'):format(dataId))
+        error(('ACE principal %s does not exist for Data ID %d.')
+            :format(principal, dataId))
     end
 
     print(('Removed ACE principal %s from Data ID %s'):format(principal, dataId))

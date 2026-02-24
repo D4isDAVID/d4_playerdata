@@ -162,7 +162,7 @@ Returns false if the given player has no assigned Data ID.
 exports.d4_playerdata:createDataId(userId)
 ```
 
-Creates and returns a new Data ID and links it to a given User ID, or `nil` if
+Creates and returns a new Data ID and links it to the given User ID, or `nil` if
 the given User ID doesn't exist.
 
 #### Parameters
@@ -197,7 +197,8 @@ is currently connected.
 exports.d4_playerdata:migrateDataId(dataId, newUserId)
 ```
 
-Moves the given Data ID to a new User ID, and returns whether it was successful.
+Moves the given Data ID to the given new User ID, and returns whether it was
+successful.
 Returns false if the Data ID does not exist, the old User ID is equal to the new
 User ID, or a player with the given Data ID is currently connected.
 
@@ -216,14 +217,15 @@ User ID, or a player with the given Data ID is currently connected.
 exports.d4_playerdata:addDataIdPrincipal(dataId, principal)
 ```
 
-Persists a given ACE principal to a given Data ID and returns whether it was
+Persists the given ACE principal to the given Data ID and returns whether it was
 successful.
-Returns `false` if the principal already exists for the given Data ID.
+Returns `false` if the given Data ID does not exist or the given ACE principal
+already exists for the given Data ID.
 
 #### Parameters
 
 - `dataId: integer` - The Data ID.
-- `principal: string` - The ACE Principal.
+- `principal: string` - The ACE principal.
 
 #### Returns
 
@@ -235,14 +237,15 @@ Returns `false` if the principal already exists for the given Data ID.
 exports.d4_playerdata:removeDataIdPrincipal(dataId, principal)
 ```
 
-Removes a given ACE principal from a given Data ID and returns whether it was
+Removes the given ACE principal from the given Data ID and returns whether it was
 successful.
-Returns `false` if the principal does not exist for the given Data ID.
+Returns `false` if the given Data ID does not exist or the given ACE principal
+does not exist for the given Data ID.
 
 #### Parameters
 
 - `dataId: integer` - The Data ID.
-- `principal: string` - The ACE Principal.
+- `principal: string` - The ACE principal.
 
 #### Returns
 

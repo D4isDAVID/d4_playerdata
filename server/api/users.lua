@@ -156,7 +156,8 @@ end
 ---@param principal string
 ---@return boolean success
 function API.users.addPrincipal(userId, principal)
-    if Storage.userToPrincipal.exists(userId, principal) then
+    if not API.users.exists(userId)
+    or Storage.userToPrincipal.exists(userId, principal) then
         return false
     end
 
@@ -174,7 +175,8 @@ end
 ---@param principal string
 ---@return boolean success
 function API.users.removePrincipal(userId, principal)
-    if not Storage.userToPrincipal.exists(userId, principal) then
+    if not API.users.exists(userId)
+    or not Storage.userToPrincipal.exists(userId, principal) then
         return false
     end
 

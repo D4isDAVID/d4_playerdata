@@ -20,7 +20,7 @@ Utils.registerCommand({
 end)
 
 Utils.registerCommand({
-    name = 'persist:getFromToken',
+    name = 'persist:fromToken',
     help = 'Get the Persist ID linked to a player token.',
     params = {
         {
@@ -41,7 +41,7 @@ Utils.registerCommand({
 end)
 
 Utils.registerCommand({
-    name = 'persist:getFromIdentifier',
+    name = 'persist:fromIdentifier',
     help = 'Get the Persist ID linked to a player identifier.',
     params = {
         {
@@ -56,6 +56,27 @@ Utils.registerCommand({
     local persistId = Storage.identifierToPersist.get(token)
     if persistId == nil then
         error(('Identifier %s is not linked to a Persist ID.'):format(token))
+    end
+
+    print(persistId)
+end)
+
+Utils.registerCommand({
+    name = 'persist:fromUser',
+    help = 'Get the Persist ID linked to a User ID.',
+    params = {
+        {
+            name = 'userId',
+            help = 'The User ID.',
+        },
+    },
+    restricted = true,
+}, function(_, args)
+    local userId = Utils.parseUserIdParam('userId', args[1])
+
+    local persistId = Storage.userToPersist.get(userId)
+    if persistId == nil then
+        error(('User ID %d is not linked to a Persist ID.'):format(userId))
     end
 
     print(persistId)

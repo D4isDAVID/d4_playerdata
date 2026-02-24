@@ -184,14 +184,15 @@ Data ID.
 exports.d4_playerdata:addUserIdPrincipal(userId, principal)
 ```
 
-Persists a given ACE principal to a given User ID and returns whether it was
+Persists the given ACE principal to the given User ID and returns whether it was
 successful.
-Returns `false` if the principal already exists for the given User ID.
+Returns `false` if the given User ID does not exist or the given ACE principal
+already exists for the given User ID.
 
 #### Parameters
 
 - `userId: integer` - The User ID.
-- `principal: string` - The ACE Principal.
+- `principal: string` - The ACE principal.
 
 #### Returns
 
@@ -203,14 +204,15 @@ Returns `false` if the principal already exists for the given User ID.
 exports.d4_playerdata:removeUserIdPrincipal(userId, principal)
 ```
 
-Removes a given ACE principal from a given User ID and returns whether it was
+Removes the given ACE principal from the given User ID and returns whether it was
 successful.
-Returns `false` if the principal does not exist for the given User ID.
+Returns `false` if the given User ID does not exist or the given ACE principal
+does not exist for the given User ID.
 
 #### Parameters
 
 - `userId: integer` - The User ID.
-- `principal: string` - The ACE Principal.
+- `principal: string` - The ACE principal.
 
 #### Returns
 

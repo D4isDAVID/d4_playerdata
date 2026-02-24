@@ -20,7 +20,7 @@ Utils.registerCommand({
 end)
 
 Utils.registerCommand({
-    name = 'users:getFromIdentifier',
+    name = 'users:fromIdentifier',
     help = 'Get the User ID from an identifier.',
     params = {
         {
@@ -204,7 +204,8 @@ Utils.registerCommand({
 
     local success = API.users.addPrincipal(userId, principal)
     if not success then
-        error(('No such User ID %d.'):format(userId))
+        error(('ACE principal %s already exists for User ID %d.')
+            :format(principal, userId))
     end
 
     print(('Added ACE principal %s to User ID %s.'):format(principal, userId))
@@ -230,7 +231,8 @@ Utils.registerCommand({
 
     local success = API.users.removePrincipal(userId, principal)
     if not success then
-        error(('No such User ID %d.'):format(userId))
+        error(('ACE principal %s does not exist for User ID %d.')
+            :format(principal, userId))
     end
 
     print(('Removed ACE principal %s from User ID %s.'):format(principal, userId))
