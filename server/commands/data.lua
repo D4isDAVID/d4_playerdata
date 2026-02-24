@@ -100,7 +100,7 @@ Utils.registerCommand({
     restricted = true,
 }, function(_, args)
     local player = Utils.parsePlayerParam('player', args[1])
-    local dataId = Utils.parseUserIdParam('dataId', args[2])
+    local dataId = Utils.parseDataIdParam('dataId', args[2])
 
     local name = GetPlayerName(player)
 
@@ -211,7 +211,7 @@ Utils.registerCommand({
     },
     restricted = true,
 }, function(_, args)
-    local dataId = Utils.parseUserIdParam('dataId', args[1])
+    local dataId = Utils.parseDataIdParam('dataId', args[1])
     local newUserId = Utils.parseUserIdParam('newUserId', args[2])
     local confirm = args[3]
 
