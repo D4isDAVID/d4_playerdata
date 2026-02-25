@@ -5,18 +5,19 @@ Utils.registerCommand({
         {
             name = 'player',
             help = 'The Net ID of the player.',
+            parser = Utils.parsePlayerParam,
         },
     },
     restricted = true,
 }, function(_, args)
-    local player = Utils.parsePlayerParam('player', args[1])
+    local player = args[1]
 
     local userId = API.users.get(player)
     if userId == nil then
         error(('%s does not have a User ID.'):format(GetPlayerName(player)))
     end
 
-    print(userId)
+    return ('User ID: %s'):format(userId)
 end)
 
 Utils.registerCommand({
@@ -30,14 +31,14 @@ Utils.registerCommand({
     },
     restricted = true,
 }, function(_, args)
-    local identifier = args[1]
+    local identifier = args[1] --[[@as string]]
 
     local userId = Storage.identifierToUser.get(identifier)
     if userId == nil then
         error(('Identifier %s is not linked to a User ID.'):format(identifier))
     end
 
-    print(userId)
+    return ('User ID: %s'):format(userId)
 end)
 
 Utils.registerCommand({
@@ -47,11 +48,12 @@ Utils.registerCommand({
         {
             name = 'userId',
             help = 'The User ID.',
+            parser = Utils.parseUserIdParam,
         },
     },
     restricted = true,
 }, function(_, args)
-    local userId = Utils.parseUserIdParam('userId', args[1])
+    local userId = args[1] --[[@as integer]]
 
     local players = API.users.getPlayers(userId)
     if #players == 0 then
@@ -59,7 +61,7 @@ Utils.registerCommand({
             :format(userId))
     end
 
-    print(table.concat(players, ', '))
+    return ('Players: %s'):format(table.concat(players, ', '))
 end)
 
 Utils.registerCommand({
@@ -69,6 +71,7 @@ Utils.registerCommand({
         {
             name = 'userId',
             help = 'The User ID.',
+            parser = Utils.parseUserIdParam,
         },
         {
             name = 'identifierType',
@@ -77,8 +80,8 @@ Utils.registerCommand({
     },
     restricted = true,
 }, function(_, args)
-    local userId = Utils.parseUserIdParam('userId', args[1])
-    local identifierType = args[2]
+    local userId = args[1] --[[@as integer]]
+    local identifierType = args[2] --[[@as string]]
 
     local identifier = Storage.userToIdentifier.get(userId, identifierType)
     if identifier == nil then
@@ -86,7 +89,7 @@ Utils.registerCommand({
             :format(identifierType, userId))
     end
 
-    print(identifier)
+    return ('Identifier (%s): %s'):format(identifierType, identifier)
 end)
 
 Utils.registerCommand({
@@ -96,18 +99,19 @@ Utils.registerCommand({
         {
             name = 'userId',
             help = 'The User ID.',
+            parser = Utils.parseUserIdParam,
         },
     },
     restricted = true,
 }, function(_, args)
-    local userId = Utils.parseUserIdParam('userId', args[1])
+    local userId = args[1] --[[@as integer]]
 
     local identifiers = Storage.userToIdentifier.getAll(userId)
     if #identifiers == 0 then
         error(('There are no linked identifiers for User ID %d.'):format(userId))
     end
 
-    print(table.concat(identifiers, ', '))
+    return ('Identifiers: %s'):format(table.concat(identifiers, ', '))
 end)
 
 Utils.registerCommand({
@@ -117,12 +121,13 @@ Utils.registerCommand({
         {
             name = 'userId',
             help = 'The User ID.',
+            parser = Utils.parseUserIdParam,
         },
     },
     restricted = true,
 }, function(_, args)
-    local userId = Utils.parseUserIdParam('userId', args[1])
-    local confirm = args[2]
+    local userId = args[1] --[[@as integer]]
+    local confirm = args[2] --[[@as string]]
 
     if confirm ~= 'confirm' then
         local players = API.users.getPlayers(userId)
@@ -141,7 +146,7 @@ Utils.registerCommand({
             :format(userId))
     end
 
-    print(('Successfully deleted User ID %d.'):format(userId))
+    return ('Successfully deleted User ID %d.'):format(userId)
 end)
 
 Utils.registerCommand({
@@ -151,17 +156,19 @@ Utils.registerCommand({
         {
             name = 'oldUserId',
             help = 'The User ID to migrate data from.',
+            parser = Utils.parseUserIdParam,
         },
         {
             name = 'newUserId',
             help = 'The User ID to migrate data to.',
+            parser = Utils.parseUserIdParam,
         },
     },
     restricted = true,
 }, function(_, args)
-    local oldUserId = Utils.parseUserIdParam('oldUserId', args[1])
-    local newUserId = Utils.parseUserIdParam('newUserId', args[2])
-    local confirm = args[3]
+    local oldUserId = args[1] --[[@as integer]]
+    local newUserId = args[2] --[[@as integer]]
+    local confirm = args[3] --[[@as string]]
 
     if confirm ~= 'confirm' then
         local players = API.users.getPlayers(oldUserId)
@@ -180,8 +187,8 @@ Utils.registerCommand({
             :format(oldUserId, newUserId))
     end
 
-    print(('Successfully migrated User ID %d to User ID %d.')
-        :format(oldUserId, newUserId))
+    return ('Successfully migrated User ID %d to User ID %d.')
+        :format(oldUserId, newUserId)
 end)
 
 Utils.registerCommand({
@@ -191,6 +198,7 @@ Utils.registerCommand({
         {
             name = 'userId',
             help = 'The User ID.',
+            parser = Utils.parseUserIdParam,
         },
         {
             name = 'principal',
@@ -199,8 +207,8 @@ Utils.registerCommand({
     },
     restricted = true,
 }, function(_, args)
-    local userId = Utils.parseUserIdParam('userId', args[1])
-    local principal = args[2]
+    local userId = args[1] --[[@as integer]]
+    local principal = args[2] --[[@as string]]
 
     local success = API.users.addPrincipal(userId, principal)
     if not success then
@@ -208,7 +216,7 @@ Utils.registerCommand({
             :format(principal, userId))
     end
 
-    print(('Added ACE principal %s to User ID %s.'):format(principal, userId))
+    return ('Added ACE principal %s to User ID %s.'):format(principal, userId)
 end)
 
 Utils.registerCommand({
@@ -218,6 +226,7 @@ Utils.registerCommand({
         {
             name = 'userId',
             help = 'The User ID.',
+            parser = Utils.parseUserIdParam,
         },
         {
             name = 'principal',
@@ -226,8 +235,8 @@ Utils.registerCommand({
     },
     restricted = true,
 }, function(_, args)
-    local userId = Utils.parseUserIdParam('userId', args[1])
-    local principal = args[2]
+    local userId = args[1] --[[@as integer]]
+    local principal = args[2] --[[@as string]]
 
     local success = API.users.removePrincipal(userId, principal)
     if not success then
@@ -235,5 +244,5 @@ Utils.registerCommand({
             :format(principal, userId))
     end
 
-    print(('Removed ACE principal %s from User ID %s.'):format(principal, userId))
+    return ('Removed ACE principal %s from User ID %s.'):format(principal, userId)
 end)

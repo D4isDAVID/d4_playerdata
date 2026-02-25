@@ -9,14 +9,14 @@ Utils.registerCommand({
     },
     restricted = true,
 }, function(_, args)
-    local player = Utils.parsePlayerParam('player', args[1])
+    local player = args[1]
 
     local persistId = API.persist.get(player)
     if persistId == nil then
         error(('%s does not have a Persist ID.'):format(GetPlayerName(player)))
     end
 
-    print(persistId)
+    return ('Persist ID: %d'):format(persistId)
 end)
 
 Utils.registerCommand({
@@ -30,14 +30,14 @@ Utils.registerCommand({
     },
     restricted = true,
 }, function(_, args)
-    local token = args[1]
+    local token = args[1] --[[@as string]]
 
     local persistId = Storage.tokenToPersist.get(token)
     if persistId == nil then
         error(('Token %s is not linked to a Persist ID.'):format(token))
     end
 
-    print(persistId)
+    return ('Persist ID: %d'):format(persistId)
 end)
 
 Utils.registerCommand({
@@ -51,14 +51,14 @@ Utils.registerCommand({
     },
     restricted = true,
 }, function(_, args)
-    local token = args[1]
+    local identifier = args[1] --[[@as string]]
 
-    local persistId = Storage.identifierToPersist.get(token)
+    local persistId = Storage.identifierToPersist.get(identifier)
     if persistId == nil then
-        error(('Identifier %s is not linked to a Persist ID.'):format(token))
+        error(('Identifier %s is not linked to a Persist ID.'):format(identifier))
     end
 
-    print(persistId)
+    return ('Persist ID: %d'):format(persistId)
 end)
 
 Utils.registerCommand({
@@ -68,18 +68,19 @@ Utils.registerCommand({
         {
             name = 'userId',
             help = 'The User ID.',
+            parser = Utils.parseUserIdParam,
         },
     },
     restricted = true,
 }, function(_, args)
-    local userId = Utils.parseUserIdParam('userId', args[1])
+    local userId = args[1] --[[@as integer]]
 
     local persistId = Storage.userToPersist.get(userId)
     if persistId == nil then
         error(('User ID %d is not linked to a Persist ID.'):format(userId))
     end
 
-    print(persistId)
+    return ('Persist ID: %d'):format(persistId)
 end)
 
 Utils.registerCommand({
@@ -89,11 +90,12 @@ Utils.registerCommand({
         {
             name = 'persistId',
             help = 'The Persist ID.',
+            parser = Utils.parsePersistIdParam,
         },
     },
     restricted = true,
 }, function(_, args)
-    local persistId = Utils.parsePersistIdParam('persistId', args[1])
+    local persistId = args[1] --[[@as integer]]
 
     local tokens = Storage.persistToToken.getAll(persistId)
     if #tokens == 0 then
@@ -101,7 +103,7 @@ Utils.registerCommand({
             :format(persistId))
     end
 
-    print(table.concat(tokens, ', '))
+    return ('Tokens: %s'):format(table.concat(tokens, ', '))
 end)
 
 Utils.registerCommand({
@@ -111,11 +113,12 @@ Utils.registerCommand({
         {
             name = 'persistId',
             help = 'The Persist ID.',
+            parser = Utils.parsePersistIdParam,
         },
     },
     restricted = true,
 }, function(_, args)
-    local persistId = Utils.parsePersistIdParam('persistId', args[1])
+    local persistId = args[1] --[[@as integer]]
 
     local identifiers = Storage.persistToIdentifier.getAll(persistId)
     if #identifiers == 0 then
@@ -123,7 +126,7 @@ Utils.registerCommand({
             :format(persistId))
     end
 
-    print(table.concat(identifiers, ', '))
+    return ('Identifiers: %s'):format(table.concat(identifiers, ', '))
 end)
 
 Utils.registerCommand({
@@ -133,11 +136,12 @@ Utils.registerCommand({
         {
             name = 'persistId',
             help = 'The Persist ID.',
+            parser = Utils.parsePersistIdParam,
         },
     },
     restricted = true,
 }, function(_, args)
-    local persistId = Utils.parsePersistIdParam('persistId', args[1])
+    local persistId = args[1] --[[@as integer]]
 
     local userIds = Storage.persistToUser.getAll(persistId)
     if #userIds == 0 then
@@ -145,5 +149,5 @@ Utils.registerCommand({
             :format(persistId))
     end
 
-    print(table.concat(userIds, ', '))
+    return ('User IDs: %s'):format(table.concat(userIds, ', '))
 end)

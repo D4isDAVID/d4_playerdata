@@ -76,7 +76,7 @@ function API.data.unassign(player)
         return false
     end
 
-    playerToDataId[source] = nil
+    playerToDataId[player] = nil
     dataIdToPlayer[dataId] = nil
 
     Utils.removePlayerPrincipal(player, Utils.getDataAceName(dataId))

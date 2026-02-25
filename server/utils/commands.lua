@@ -1,6 +1,7 @@
----@class RegisterCommandParam
+---@class RegisterCommandParam<T>
 ---@field name string
 ---@field help string?
+---@field parser? fun(name: string, value: string): T
 
 ---@class RegisterCommandOptions
 ---@field name string
@@ -11,10 +12,50 @@
 ---@type RegisterCommandOptions[]
 local commands = {}
 
+---@param player unknown
+---@param message string
+local function sendCommandResult(player, message)
+    exports.chat:addMessage(player, {
+        args = { message },
+    })
+end
+
 ---@param command RegisterCommandOptions
----@param handler fun(source: unknown, args: string[])
+---@param handler fun(source: unknown, args: unknown[]): unknown
 function Utils.registerCommand(command, handler)
-    RegisterCommand(command.name, handler, command.restricted)
+    ---@param source unknown
+    ---@param rawArgs string[]
+    ---@return unknown
+    local wrapped = function(source, rawArgs)
+        local params = command.params or {}
+        local args = {}
+
+        for i = 1, #rawArgs do
+            local param = params[i] or {}
+            local arg = rawArgs[i]
+
+            if param.parser == nil then
+                args[i] = arg
+            else
+                args[i] = param.parser(param.name, arg)
+            end
+        end
+
+        return handler(source, args)
+    end
+
+    RegisterCommand(command.name, function(source, args)
+        CreateThread(function()
+            local success, result = pcall(wrapped, source, args)
+            local message = tostring(result)
+
+            if success then
+                sendCommandResult(source, message)
+            else
+                sendCommandResult(source, '^1' .. message .. '^7')
+            end
+        end)
+    end, command.restricted)
 
     command.name = '/' .. command.name
     commands[#commands + 1] = command
