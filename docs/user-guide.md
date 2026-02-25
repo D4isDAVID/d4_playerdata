@@ -34,10 +34,21 @@ documentation.
 This resource uses [Convars] for its configuration. These can be changed live
 without restarting the resource. Below are the available convars.
 
+### Use Persist IDs
+
+```
+set d4_playerdata:usePersistIds true
+```
+
+Whether to enforce Persist IDs when players join.
+
+- Type: `boolean`
+- Default: `true`
+
 ### Allow Duplicate Users
 
 ```
-set d4_playerdata_allowDuplicateUsers false
+set d4_playerdata:allowDuplicateUsers false
 ```
 
 Whether to allow multiple players with the same User ID to join the server
@@ -49,7 +60,7 @@ simultaneously. Useful when using 2 clients with `-cl2`.
 ### Migrate Multiple Users
 
 ```
-set d4_playerdata_migrateMultipleUsers true
+set d4_playerdata:migrateMultipleUsers false
 ```
 
 Whether to migrate all Data IDs into one User ID when multiple User IDs are
@@ -57,12 +68,12 @@ linked to a joining player. Data IDs and identifiers will be permanently moved
 to the oldest linked User ID, and the other User IDs will be deleted.
 
 - Type: `boolean`
-- Default: `true`
+- Default: `false`
 
 ### Required Identifiers
 
 ```
-set d4_playerdata_requiredIdentifiers []
+set d4_playerdata:requiredIdentifiers []
 ```
 
 A set of [identifier types] to require. Players missing a required identifier
@@ -74,7 +85,7 @@ type will be rejected during connection.
 ### Ignored Identifiers
 
 ```
-set d4_playerdata_ignoredIdentifiers []
+set d4_playerdata:ignoredIdentifiers []
 ```
 
 A set of [identifier types] to completely ignore when identifying players.
