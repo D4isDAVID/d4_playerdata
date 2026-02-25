@@ -312,6 +312,18 @@ Prints the Persist ID linked to the given User ID.
 
 - `userId` - The User ID.
 
+### Get Players from Persist ID
+
+```
+/persist:getPlayers <persistId>
+```
+
+Prints the player Net IDs linked to the given Persist ID.
+
+#### Parameters
+
+- `persistId` - The player's Persist ID.
+
 ### Get Tokens from Persist ID
 
 ```

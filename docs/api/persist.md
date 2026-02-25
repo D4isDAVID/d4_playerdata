@@ -104,6 +104,23 @@ Resolves and returns Persist IDs based on the given tokens and identifiers.
 
 - `integer[]` - The resolved Persist IDs.
 
+### Get Players from Persist ID
+
+```lua
+exports.d4_playerdata:getPlayersFromPersistId(userId)
+```
+
+Returns the player Net IDs linked to the given Persist ID.
+The returned table will be empty when offline.
+
+#### Parameters
+
+- `persistId: integer` - The player's Persist ID.
+
+#### Returns
+
+- `string[]` - The player Net IDs linked to the given Persist ID.
+
 ### Get Tokens from Persist ID
 
 ```lua

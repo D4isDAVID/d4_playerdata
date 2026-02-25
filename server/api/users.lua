@@ -75,7 +75,7 @@ function API.users.isConnected(userId)
 end
 
 ---@param userId integer
----@return unknown[] player
+---@return unknown[] players
 function API.users.getPlayers(userId)
     if userIdToPlayers[userId] == nil then
         return {}

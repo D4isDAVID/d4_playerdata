@@ -41,6 +41,12 @@ function Utils.registerCommand(command, handler)
             end
         end
 
+        for i = 1, #params do
+            if args[i] == nil then
+                error(('Parameter %s not provided'):format(params[i].name))
+            end
+        end
+
         return handler(source, args)
     end
 

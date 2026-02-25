@@ -46,6 +46,16 @@ function API.persist.resolve(tokens, identifiers)
     return persistIds
 end
 
+---@param playerId integer
+---@return unknown[] players
+function API.persist.getPlayers(playerId)
+    if persistIdToPlayers[playerId] == nil then
+        return {}
+    end
+
+    return Utils.keys(persistIdToPlayers[playerId])
+end
+
 ---@param persistId integer
 ---@param tokens string[]
 local function linkTokens(persistId, tokens)
@@ -179,6 +189,7 @@ exports('getPersistIdFromIdentifier', Storage.identifierToPersist.get)
 exports('getPersistIdFromUserId', Storage.userToPersist.get)
 exports('doesPersistIdExist', API.persist.exists)
 exports('resolvePersistIds', API.persist.resolve)
+exports('getPlayersFromPersistId', API.persist.getPlayers)
 exports('getTokensFromPersistId', Storage.persistToToken.getAll)
 exports('getIdentifiersFromPersistId', Storage.persistToIdentifier.getAll)
 exports('getUserIdsFromPersistId', Storage.persistToUser.getAll)

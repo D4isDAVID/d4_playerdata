@@ -84,6 +84,29 @@ Utils.registerCommand({
 end)
 
 Utils.registerCommand({
+    name = 'persist:getPlayers',
+    help = 'Get the connected players from a Persist ID.',
+    params = {
+        {
+            name = 'persistId',
+            help = 'The Persist ID.',
+            parser = Utils.parsePersistIdParam,
+        },
+    },
+    restricted = true,
+}, function(_, args)
+    local persistId = args[1] --[[@as integer]]
+
+    local players = API.users.getPlayers(persistId)
+    if #players == 0 then
+        error(('There are no connected players with the Persist ID %d.')
+            :format(persistId))
+    end
+
+    return ('Players: %s'):format(table.concat(players, ', '))
+end)
+
+Utils.registerCommand({
     name = 'persist:getTokens',
     help = 'Get all linked player tokens from a Persist ID.',
     params = {
