@@ -29,6 +29,10 @@ If you are installing this resource as a dependency, no additional setup is
 required. Feel free to configure it as you see fit, and read the rest of the
 documentation.
 
+For users, this resource provides **[Commands]** to manage IDs.
+
+For developers, see the API references in the docs **[README.md]** file.
+
 ## Configuration
 
 This resource uses [Convars] for its configuration. These can be changed live
@@ -94,6 +98,8 @@ A set of [identifier types] to completely ignore when identifying players.
 - Type: `string[]`
 - Default: `[]`
 
+[commands]: ./commands.md
+[readme.md]: ./README.md
 [latest release]: https://github.com/D4isDAVID/d4_playerdata/releases/latest
 [convars]: https://docs.fivem.net/docs/scripting-reference/convars/
 [identifier types]: https://docs.fivem.net/docs/scripting-reference/runtimes/lua/functions/GetPlayerIdentifiers/#identifier-types

@@ -6,7 +6,7 @@ This documentation covers usage, concepts, the API, and internal design details.
 
 Essential information for anyone using the resource.
 
-- **[User Guide](./user-guide.md):** Installation, configuration, and usage
+- **[User Guide](./user-guide.md):** Installation, usage, and configuration
 - **[Player Data](./player-data.md):** User IDs, Data IDs, and Persist IDs
 
 ## API
