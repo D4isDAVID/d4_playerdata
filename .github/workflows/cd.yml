@@ -16,7 +16,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
         with:
-          path: d4_playerdata
           sparse-checkout: |
             docs
             server
@@ -31,8 +30,8 @@ jobs:
       - name: Archive
         shell: bash
         run: |
-          rm -rf ./d4_playerdata/.git
-          zip -r d4_playerdata.zip ./d4_playerdata/
+          rm -rf .git
+          zip -r d4_playerdata.zip .
 
       - name: Draft release
         uses: softprops/action-gh-release@v2
