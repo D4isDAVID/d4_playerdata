@@ -71,7 +71,7 @@ Returns whether a given Data ID exists.
 ### Does Data ID Exist for User ID
 
 ```lua
-exports.d4_playerdata:doesDataIdExistForUser(userId, dataId)
+exports.d4_playerdata:doesDataIdExistForUserId(userId, dataId)
 ```
 
 Returns whether the given Data ID is linked to the given User ID.
