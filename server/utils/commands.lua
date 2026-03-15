@@ -16,7 +16,7 @@ local commands = {}
 ---@param message string
 local function sendCommandResult(player, message)
     exports.chat:addMessage(player, {
-        args = { message },
+        args = { Utils.currentResource, message },
     })
 end
 
