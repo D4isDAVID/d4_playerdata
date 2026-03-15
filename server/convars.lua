@@ -68,7 +68,7 @@ Convars = {
     requiredIdentifiers = createConvarHandler(
         'd4_playerdata:requiredIdentifiers',
         {},
-        getConvarTable
+        getConvarSet
     ),
     ---@return table<string, true>
     ignoredIdentifiers = createConvarHandler(
