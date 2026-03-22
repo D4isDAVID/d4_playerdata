@@ -1,4 +1,4 @@
-local METADATA = 'd4_playerdata_disableDataAutoAssign'
+local METADATA <const> = 'd4_playerdata_disableDataAutoAssign'
 
 ---@type table<string, true>
 local resources = {}
