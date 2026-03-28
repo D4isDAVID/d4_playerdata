@@ -15,6 +15,11 @@ local commands = {}
 ---@param player unknown
 ---@param message string
 local function sendCommandResult(player, message)
+    if player == 0 then
+        print(message)
+        return
+    end
+
     exports.chat:addMessage(player, {
         args = { Utils.currentResource, message },
     })
