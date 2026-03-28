@@ -229,6 +229,8 @@ function API.users.connect(player)
                         removeCache(connectingPlayer)
                     end
                 end
+
+                Wait(1000)
             end
 
             connectingThreadRunning = false
