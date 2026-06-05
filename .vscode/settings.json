@@ -1,25 +1,8 @@
 {
-  "editor.defaultFormatter": "sumneko.lua",
-  "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "file",
   "files.insertFinalNewline": true,
-  "Lua.nameStyle.config": {
-    "local_name_style": "camel_case",
-    "function_param_name_style": [
-      "camel_case",
-      {
-        "type": "ignore",
-        "param": ["_"]
-      }
-    ],
-    "function_name_style": "camel_case",
-    "local_function_name_style": "camel_case",
-    "table_field_name_style": "camel_case",
-    "global_variable_name_style": "pascal_case",
-    "module_name_style": "camel_case",
-    "require_module_name_style": "camel_case",
-    "class_name_style": "pascal_case",
-    "const_variable_name_style": "upper_snake_case",
-    "module_local_name_style": "camel_case"
-  },
+  "[lua]": {
+    "editor.defaultFormatter": "sumneko.lua",
+    "editor.formatOnSave": true,
+    "editor.formatOnSaveMode": "file",
+  }
 }

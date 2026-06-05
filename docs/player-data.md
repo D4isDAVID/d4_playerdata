@@ -24,63 +24,97 @@ Please read the following links for additional context:
 
 ## User IDs
 
+### Motivation
+
 To save player data across logins and restarts, FiveM provides us with player
 identifiers. Most frameworks use a single identifier; typically `license2` or
-`license`, based on availability. This can pose a problem, however, as
-`license2` is not always available, and `license` is prone to changes. This can
-lead to some players losing access to their data, or not being able to join at
-all. The other identifiers aren't reliable either, as they might require players
-to play using a specific platform, or link an external account, locking out
-certain players.
+`license`, based on availability. This can pose a problem, however, as rare
+cases exist where these identifiers change over time. This can lead to some
+players losing access to their data, or not being able to join at all. Using
+other identifiers alone isn't reliable either, as they might require players to
+play using a specific platform, or link an external account, locking out certain
+players. This resource's solution is to use *all* available identifiers — except
+for `ip`, as it is not specific enough.
 
-This resource solves this by using *all* available identifiers, except for `ip`,
-as it is not specific enough. These identifiers will be linked to a User ID. The
-User ID is an integer value assigned to players, intended for developers to use
-as a replacement for identifiers. This allows the resource to reliably identify
-the player, while your resources handle the rest.
+### Definition
 
-When a player joins the server, this resource collects their identifiers. If a
-linked User ID is found, then it is assigned to the player. If new and unlinked
-identifiers are found, they are also linked to the User ID. By default, in the
-case that multiple User IDs are found, the oldest User ID is assigned, and
-existing identifier links are not modified. This can be changed to migrate data
-to the oldest User ID, and delete the other User IDs. If no linked User ID is
-found, a new one is created and linked to the identifiers.
+The "User ID" is an integer value (starting from `1` and incremented by `1`)
+linked to player identifiers, intended for developers to use as a replacement
+for those identifiers. This resource will reliably identify the player, while
+your resources handle the rest.
+
+### Assignment
+
+When a player joins the server, this resource collects their identifiers. If no
+linked User ID is found, a new one is created and linked to the identifiers. If
+a linked User ID is found, then it is assigned to the player, and any unlinked
+identifiers are linked to the assigned User ID.
 
 Players are also given an ACE principal based on the User ID: `user.<UserId>`.
 
+### Multiple User IDs
+
+By default, in the case that multiple linked User IDs are found, the oldest User
+ID (i.e. the smallest number) is assigned, and existing identifier links are not
+modified. This can be changed with the `d4_playerdata:migrateMultipleUsers`
+convar to migrate data to the oldest User ID, and delete the other User IDs.
+
 ## Data IDs
 
-The Data ID is an integer value provided by this resource, similar to a
-character or a save file. One User ID can have multiple Data IDs, similar to
-having multiple characters or save files. This is intended for developers to use
-as a framework-agnostic solution to save player data, replacing
-framework-dependent character IDs. It is recommended to almost always use Data
-IDs to save data. Use User IDs only for data that should persist across all Data
-IDs.
+### Motivation
 
-By default, when a player joins, this resource automatically assigns the first
-Data ID linked to the player's User ID, or creates one if none exist. Other
-resources can disable this functionality by adding the
-`d4_playerdata_disableDataAutoAssign 'yes'` metadata to their `fxmanifest.lua`
-file, to implement their own Data ID assignments, such as a character
-selection screen.
+Often times the User ID is not enough to save player data. Some servers may
+benefit from implementing multiple characters/data/save slots for a single
+player. However, character IDs, save slots or data slots on FiveM are often
+framework-specific. This resource provides its own API for player data slots,
+allowing to integrate with existing frameworks as well.
+
+### Definition
+
+The "Data ID" is an integer value (starting from `1` and incremented by `1`)
+linked to a User ID, similar to a character or a save file. One User ID can have
+multiple Data IDs, similar to having multiple characters or save files. This is
+intended for developers to use as a framework-agnostic solution to save player
+data, replacing framework-dependent character IDs.
+
+It is recommended to almost always use Data IDs to save data, and use User IDs
+only for data that should persist across all Data IDs.
 
 Players are also given an ACE principal based on the Data ID: `data.<DataId>`.
 
+### Assignment
+
+By default, when a player joins, this resource automatically assigns the first
+Data ID (i.e. the smallest number) linked to the player's User ID, or creates
+one if none exist. Other resources can disable this functionality by adding the
+`d4_playerdata_disableDataAutoAssign 'yes'` metadata to their `fxmanifest.lua`
+file to implement their own Data ID assignments, such as a character selection
+screen.
+
 ## Persist IDs
+
+Persist IDs are optional, and can be disabled with the
+`d4_playerdata:usePersistIds` convar.
+
+### Motivation
 
 To ban players effectively, FiveM provides us with player hardware tokens, in
 addition to identifiers. This allows servers to ban a player's entire machine,
-network (with the `ip` identifier), and more. When a player joins the server,
-this resource collects their tokens and identifiers and links them to a
-Persist ID. Any User IDs linked to the player are linked to the Persist ID as
-well. The Persist ID is an integer value assigned to players, intended for
+network (with the `ip` identifier), and more.
+
+### Definition
+
+The "Persist ID" is an integer value (starting from `1` and incremented by `1`)
+linked to player identifiers, hardware tokens and User IDs, intended for
 effective banning.
 
 Since Persist IDs use the `ip` identifier and hardware tokens, it is unreliable
-to use for data storage of any kind. Avoid using Persist IDs for data storage of
-any kind.
+to use for data storage of any kind. Avoid using Persist IDs for data storage
+completely.
 
-This functionality is optional, and can be disabled with the
-`d4_playerdata_usePersistIds` convar.
+### Assignment
+
+When a player joins the server, this resource collects their tokens, identifiers
+and User IDs. If no linked Persist ID is found, a new one is created and linked
+to the data. If a linked Persist ID is found, then it is assigned to the player,
+and any unlinked data is linked to the assigned Persist ID.

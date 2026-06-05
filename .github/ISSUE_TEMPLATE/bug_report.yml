@@ -73,6 +73,6 @@ body:
     attributes:
       label: FXServer Build
       description: Which FXServer build are you using? (use the console `version` command to find out)
-      placeholder: e.g. FXServer-master SERVER v1.0.0.17000 win32
+      placeholder: e.g. FXServer-master SERVER v1.0.0.25770 win32
     validations:
       required: true

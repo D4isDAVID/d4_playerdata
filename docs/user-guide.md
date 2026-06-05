@@ -44,7 +44,7 @@ without restarting the resource. Below are the available convars.
 set d4_playerdata:usePersistIds true
 ```
 
-Whether to enforce Persist IDs when players join.
+Whether to create and assign Persist IDs when players join.
 
 - Type: `boolean`
 - Default: `true`
@@ -92,7 +92,7 @@ type will be rejected during connection.
 set d4_playerdata:ignoredIdentifiers []
 ```
 
-A set of [identifier types] to completely ignore when identifying players.
+A set of [identifier types] to completely ignore when assigning User IDs.
 `ip` is **always** included in this set.
 
 - Type: `string[]`

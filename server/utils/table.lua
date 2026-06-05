@@ -1,6 +1,6 @@
 ---@generic T
 ---@param tble table<T, unknown>
----@return T keys
+---@return T[] keys
 function Utils.keys(tble)
     local keys = {}
 

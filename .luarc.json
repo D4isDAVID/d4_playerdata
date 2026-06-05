@@ -8,19 +8,19 @@
       "no-unknown"
     ],
     "groupFileStatus": {
-      "ambiguity": "Opened",
-      "await": "Opened",
-      "codestyle": "Opened",
-      "conventions": "Opened",
-      "duplicate": "Opened",
-      "global": "Opened",
-      "luadoc": "Opened",
-      "redefined": "Opened",
-      "strict": "Opened",
-      "strong": "Opened",
-      "type-check": "Opened",
-      "unbalanced": "Opened",
-      "unused": "Opened"
+      "ambiguity": "Any",
+      "await": "Any",
+      "codestyle": "Any",
+      "conventions": "Any",
+      "duplicate": "Any",
+      "global": "Any",
+      "luadoc": "Any",
+      "redefined": "Any",
+      "strict": "Any",
+      "strong": "Any",
+      "type-check": "Any",
+      "unbalanced": "Any",
+      "unused": "Any"
     },
     "groupSeverity": {
       "ambiguity": "Error",
