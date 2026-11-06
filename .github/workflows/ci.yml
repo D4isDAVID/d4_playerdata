@@ -16,12 +16,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v7
+        with:
+          path: d4_playerdata
 
       - name: Checkout fivem-lls-addon
         uses: actions/checkout@v7
         with:
           repository: overextended/fivem-lls-addon
-          path: ../fivem-lls-addon
+          path: fivem-lls-addon
           sparse-checkout: |
             library
           sparse-checkout-cone-mode: false
@@ -29,4 +31,6 @@ jobs:
       - name: Lint
         uses: PocusSoftware/lint-luals@v1
         with:
+          check: d4_playerdata
+          configpath: .luarc.ci.json
           fail_on_warnings: true
