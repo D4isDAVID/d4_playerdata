@@ -51,7 +51,10 @@
           "param": ["_"]
         }
       ],
-      "function_name_style": "camel_case",
+      "function_name_style": [
+        "camel_case",
+        "pascal_case"
+      ],
       "local_function_name_style": "camel_case",
       "table_field_name_style": "camel_case",
       "global_variable_name_style": "pascal_case",
@@ -85,5 +88,10 @@
     "inferParamType": false,
     "weakNilCheck": false,
     "weakUnionCheck": false
+  },
+  "workspace": {
+    "ignoreDir": [
+      "fivem-lls-addon"
+    ]
   }
 }
