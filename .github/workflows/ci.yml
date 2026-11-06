@@ -26,7 +26,7 @@ jobs:
           path: fivem-lls-addon
           sparse-checkout: |
             library
-            plugin.json
+            plugin.lua
           sparse-checkout-cone-mode: false
 
       - name: Lint
