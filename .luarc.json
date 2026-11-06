@@ -80,6 +80,7 @@
       "|=",
       "^="
     ],
+    "plugin": "${env:CFX_LUALS_ADDON}/plugin.lua",
     "version": "Lua 5.4"
   },
   "type": {
@@ -91,7 +92,15 @@
   },
   "workspace": {
     "ignoreDir": [
+      ".git",
+      ".github",
+      ".vscode",
+      ".zed",
+      "docs",
       "fivem-lls-addon"
+    ],
+    "library": [
+      "${env:CFX_LUALS_ADDON}/library"
     ]
   }
 }

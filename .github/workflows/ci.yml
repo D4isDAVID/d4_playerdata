@@ -26,11 +26,13 @@ jobs:
           path: fivem-lls-addon
           sparse-checkout: |
             library
+            plugin.json
           sparse-checkout-cone-mode: false
 
       - name: Lint
         uses: PocusSoftware/lint-luals@v1
+        env:
+          CFX_LUALS_ADDON: ${{ github.workspace }}/fivem-lls-addon
         with:
           check: d4_playerdata
-          configpath: .luarc.ci.json
           fail_on_warnings: true
