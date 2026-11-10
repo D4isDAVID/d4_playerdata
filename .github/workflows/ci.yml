@@ -17,22 +17,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
         with:
-          path: d4_playerdata
+          path: ${{ github.event.repository.name }}
 
       - name: Checkout fivem-lls-addon
         uses: actions/checkout@v7
         with:
           repository: overextended/fivem-lls-addon
           path: fivem-lls-addon
-          sparse-checkout: |
-            library
-            plugin.lua
-          sparse-checkout-cone-mode: false
 
       - name: Lint
         uses: PocusSoftware/lint-luals@v1
         env:
           CFX_LUALS_ADDON: ${{ github.workspace }}/fivem-lls-addon
         with:
-          check: d4_playerdata
+          check: ${{ github.event.repository.name }}
           fail_on_warnings: true
