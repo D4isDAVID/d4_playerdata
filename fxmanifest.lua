@@ -7,8 +7,11 @@ author 'David Malchin <malchin459@gmail.com>'
 repository 'https://github.com/D4isDAVID/d4_playerdata'
 
 server_only 'yes'
-lua54 'yes'
 use_experimental_fxv2_oal 'yes'
+
+dependencies {
+    '/server:37346', -- Lua 5.4
+}
 
 server_scripts {
     'server/init.lua',
