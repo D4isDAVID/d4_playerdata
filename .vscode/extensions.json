@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "overextended.cfxlua-vscode",
     "EditorConfig.EditorConfig",
     "sumneko.lua"
   ]

@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           sparse-checkout: |
             docs
@@ -31,7 +31,7 @@ jobs:
         shell: bash
         run: |
           rm -rf .git
-          zip -r d4_playerdata.zip .
+          zip -r "${{ github.event.repository.name }}.zip" .
 
       - name: Draft release
         uses: softprops/action-gh-release@v3

@@ -57,11 +57,11 @@ This project's source code © 2025 David Malchin is licensed under the
 
 [github discussions]: https://github.com/D4isDAVID/d4_playerdata/discussions
 [discord server]: https://discord.gg/rdjpS2K8hC
-[users api]: https://github.com/D4isDAVID/d4_playerdata/blob/main/docs/api/users.md
-[data api]: https://github.com/D4isDAVID/d4_playerdata/blob/main/docs/api/data.md
-[persist api]: https://github.com/D4isDAVID/d4_playerdata/blob/main/docs/api/persist.md
+[users api]: ./docs/api/users.md
+[data api]: ./docs/api/data.md
+[persist api]: ./docs/api/persist.md
 [user guide]: ./docs/user-guide.md
 [`docs/`]: ./docs/README.md
-[security policy]: https://github.com/D4isDAVID/d4_playerdata/security/policy
+[security policy]: ./SECURITY.md
 [contributing guidelines]: ./CONTRIBUTING.md
 [license]: ./LICENSE
